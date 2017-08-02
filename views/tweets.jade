@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1 Tweets
+
+    ol
+        each tweet, i in tweets
+            li #{tweet.text}
+
