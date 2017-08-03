@@ -2,6 +2,6 @@
 Just learning some stuff
 
 #TODO
-store to db 
-implement elastic search
-visualise data
+1. store to db 
+2. implement elastic search
+3. visualise data
