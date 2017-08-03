@@ -20,5 +20,4 @@ function fetchTweets(twit, tweets, queryParams) {
     });
 }
 
-
 module.exports = fetchTweets;
