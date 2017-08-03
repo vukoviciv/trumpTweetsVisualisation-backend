@@ -1,6 +1,4 @@
 function fetchTweets(twit, tweets, queryParams) {
-    console.log("query params", queryParams);
-
     return new Promise((resolve, reject) => {
         if (tweets.length > 20) {
             resolve(tweets);
