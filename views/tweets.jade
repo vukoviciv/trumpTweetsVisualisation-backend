@@ -5,5 +5,11 @@ block content
 
     ol
         each tweet, i in tweets
-            li #{tweet.text}
+            li
+                img(src=`${tweet.profile_image_url}`)
+                span #{tweet.text}
+                span    @ #{tweet.created_at}
+
+
+
 
