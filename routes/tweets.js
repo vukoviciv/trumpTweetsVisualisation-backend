@@ -1,17 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const options = require('../lib/options');
 
-const {twit} = require('../lib/twitter');
-let options = require('../lib/options');
-
-const fetchTweets = require('../public/js/handleTweets');
+const fetchTweets = require('../lib/helpers');
 
 router.get('/', (req, res) => {
-    let tweets = [];
-    delete options.queryParams.max_id;
-
-    fetchTweets(twit, tweets, options.queryParams)
-        .then((data) => res.render('tweets', {tweets: data}))
+    fetchTweets(options)
+        .then(data => res.render('tweets', {tweets: data}))
         .catch((err) => res.render('error', {error: err}));
 });
 
