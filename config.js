@@ -5,4 +5,15 @@ const twitterConfig = {
     access_token_secret: 'yui3Knhs4JpCsae1lIyAlu4txSnIYvcEXclTKuX4tyln7'
 };
 
-module.exports = {twitterConfig};
+// DB connection
+const connectionConfig = {
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'trump_tweets'
+};
+
+module.exports = {
+    twitterConfig,
+    connectionConfig
+};
