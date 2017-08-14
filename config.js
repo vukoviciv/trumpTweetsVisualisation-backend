@@ -1,9 +1,5 @@
-const twitterConfig = {
-    consumer_key: 'uPUYHfgDdMuPR7jzZv8hm26pc',
-    consumer_secret: 'B8WSnSmjbJXlPfSTnPZnxJ6WxiJhjpvA1NBMBQqoVwuxg1ZLps',
-    access_token: '892325969851273216-ILfVbVkqVRTCt1T67HQpMXtvg6nhEVL',
-    access_token_secret: 'yui3Knhs4JpCsae1lIyAlu4txSnIYvcEXclTKuX4tyln7'
-};
+const fs = require('fs');
+const twitterConfig = JSON.parse(fs.readFileSync('./twitterAccount.json'));
 
 // DB connection
 const connectionConfig = {

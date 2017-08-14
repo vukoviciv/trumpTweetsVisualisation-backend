@@ -17,3 +17,6 @@ package-lock.json
 
 # Data
 data
+
+# Twitter account
+twitterAccount.json
