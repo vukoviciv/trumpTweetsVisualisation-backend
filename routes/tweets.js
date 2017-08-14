@@ -10,4 +10,12 @@ router.get('/', (req, res) => {
         .catch((err) => res.render('error', {error: err}));
 });
 
+//router.post('/update', (req, res) => {
+//    fetchTweets(options)
+//        .then(data => {
+//
+//        })
+//        .catch((err) => res.render('error', {error: err}));
+//});
+
 module.exports = router;
