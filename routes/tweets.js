@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const options = require('../lib/options');
+const tweetRepository = require('../repositories/tweetRepository');
 
 const fetchTweets = require('../lib/helpers');
 
@@ -10,12 +11,12 @@ router.get('/', (req, res) => {
         .catch((err) => res.render('error', {error: err}));
 });
 
-//router.post('/update', (req, res) => {
-//    fetchTweets(options)
-//        .then(data => {
-//
-//        })
-//        .catch((err) => res.render('error', {error: err}));
-//});
+router.get('/update', (req, res) => {
+    const redirectRoute = '/tweets';
+
+    tweetRepository
+        .saveOne()
+        .then(res.redirect(redirectRoute));
+});
 
 module.exports = router;

@@ -8,5 +8,4 @@ block content
     ol
         each tweet, i in tweets
             li
-                img(src=`${tweet.user.profile_image_url}`)
-                span #{tweet.text}
+                span #{tweet.full_text}
