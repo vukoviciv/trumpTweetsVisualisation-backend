@@ -14,9 +14,12 @@ router.get('/', (req, res) => {
 router.get('/update', (req, res) => {
     const redirectRoute = '/tweets';
 
+    // get current and store it
     tweetRepository
         .saveOne()
         .then(res.redirect(redirectRoute));
+
+    // TODO: get all tweets and store it
 });
 
 module.exports = router;
