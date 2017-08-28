@@ -2,7 +2,8 @@ const models = require('../models');
 
 function saveOne(tweet) {
     return models.Tweet.findOrCreate({
-            where: {id_str: tweet.id_str}
+            where: {id_str: tweet.id_str},
+            defaults: tweet
         })
         .spread((tweet, created) => {
             console.log("created: ", created);
