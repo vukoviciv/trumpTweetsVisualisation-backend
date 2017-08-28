@@ -16,15 +16,11 @@ router.get('/update', (req, res) => {
 
     fetchTweets(options)
         .then(data => {
-            console.log("data: ", data);
-            tweetRepository.saveOne(data[0])
+            tweetRepository.saveBulk(data)
                 .then(res.redirect(redirectRoute))
+                .catch(err => res.render('error', {error, err}))
         })
-        .catch((err) => res.render('error', {error: err}));
-
-    // TODO: get all tweets and store it
-
-
+        .catch(err => res.render('error', {error: err}));
 });
 
 module.exports = router;
