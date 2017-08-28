@@ -10,8 +10,9 @@ const testTweet = {
 };
 
 function saveOne(tweet) {
+    console.log("tweet");
     return models.Tweet.findOrCreate({
-            where: testTweet //temp
+            where: tweet //temp
         })
         .spread((tweet, created) => {
             console.log("created: ", created);
