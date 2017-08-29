@@ -6,28 +6,50 @@ const tweetRepository = require('../repositories/tweetRepository');
 const fetchTweets = require('../lib/helpers');
 
 router.get('/', (req, res) => {
-    console.log("back to tweets******************************************************************")
     tweetRepository.fetchAll()
         .then(data => res.render('tweets', {tweets: data}))
         .catch((err) => res.render('error', {error: err}));
 });
 
+
+// TODO: solve the issue of initial storing of tweets.
+//router.get('/update', (req, res) => {
+//    const redirectRoute = '/tweets';
+//
+//    tweetRepository.getLastEntry().then(lastTweet => {
+//            let lastTweetId = lastTweet ? lastTweet.id_str : null;
+//
+//            fetchTweets(options, lastTweetId)
+//                .then(data => {
+//                    tweetRepository.saveBulk(data)
+//                        .then(data => console.log(data))
+//                        .catch(err => res.render('error', {error, err}))
+//                })
+//                .then(data => res.redirect(redirectRoute))
+//                .catch(err => res.render('error', {error: err}));
+//        })
+//        .catch(error => console.log(error));
+//});
+
 router.get('/update', (req, res) => {
     const redirectRoute = '/tweets';
 
-    tweetRepository.getLastEntry().then(lastTweet => {
-            let lastTweetId = lastTweet ? lastTweet.id_str : null;
+    tweetRepository.getNewestTweet()
+        .then(lastTweet => {
 
-            fetchTweets(options, lastTweetId)
+            console.log(lastTweet.id_str, lastTweet.full_text);
+
+            options.sinceId = lastTweet.id_str;
+            fetchTweets(options)
                 .then(data => {
                     tweetRepository.saveBulk(data)
                         .then(data => console.log(data))
-                        .catch(err => res.render('error', {error, err}))
+                        .catch(err => res.render('error', {error: err}))
                 })
                 .then(data => res.redirect(redirectRoute))
-                .catch(err => res.render('error', {error: err}));
+                .catch(err => res.render('error', {error: err}))
         })
-        .catch(error => console.log(error));
+        .catch(err => console.log(err));
 });
 
 module.exports = router;
