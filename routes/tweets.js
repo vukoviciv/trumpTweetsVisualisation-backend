@@ -11,26 +11,6 @@ router.get('/', (req, res) => {
         .catch((err) => res.render('error', {error: err}));
 });
 
-
-// TODO: solve the issue of initial storing of tweets.
-//router.get('/update', (req, res) => {
-//    const redirectRoute = '/tweets';
-//
-//    tweetRepository.getLastEntry().then(lastTweet => {
-//            let lastTweetId = lastTweet ? lastTweet.id_str : null;
-//
-//            fetchTweets(options, lastTweetId)
-//                .then(data => {
-//                    tweetRepository.saveBulk(data)
-//                        .then(data => console.log(data))
-//                        .catch(err => res.render('error', {error, err}))
-//                })
-//                .then(data => res.redirect(redirectRoute))
-//                .catch(err => res.render('error', {error: err}));
-//        })
-//        .catch(error => console.log(error));
-//});
-
 router.get('/update', (req, res) => {
     const redirectRoute = '/tweets';
 

@@ -43,13 +43,17 @@ function getNewestTweet() {
     }).then(one => one)
 }
 
-//function getLastEntry() {
-//    return models.Tweet.findOne({order: [['id', 'DESC']]}).then(one => one);
-//}
+/* Oldest tweet will have newest biggest ID in db. It because we are fetching in preset -> past timeline */
+function getOldestTweet() {
+    return models.Tweet.findOne({
+        order: [['id_str', 'ASC']]
+    }).then(one => one)
+}
 
 module.exports = {
     saveOne,
     saveBulk,
     fetchAll,
-    getNewestTweet
+    getNewestTweet,
+    getOldestTweet
 };

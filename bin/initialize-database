@@ -1,43 +1,40 @@
 #!/usr/bin/env node
-
-console.log("+++++++++++++++++++++++++++++++++++++++++++++++++ hello?");
-
+/**
+ * First create database using command
+ *          create database <database_name> character set utf8mb4 COLLATE utf8mb4_unicode_ci;
+ * After that, run this script with
+ *          npm run initialize-db
+ *
+ * Script will create table and store all current tweets (up to 10000; see config.json). After that, just use functions
+ * for updating tweets.
+ **/
 
 const models = require('../models');
+models.sequelize.sync();
+
+const options = require('../lib/options');
+const fetchTweets = require('../lib/helpers');
+
 const Tweet = models.Tweet;
 
-const test = [
-    {
-        id_str: '901032475111116800',
-        full_text: 'Few, if any, Administrations have done more in just 7 months than the Trump A. Bills passed, regulations killed, border, military, ISIS, SC!',
-        source: '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
-        created_at: 'Fri Aug 25 10:44:17 +0000 2017',
-        retweet_count: 15628,
-        favorite_count: 70984
-    },
-    {
-        id_str: '901032475111116800',
-        full_text: 'Few, if any, Administrations have done more in just 7 months than the Trump A. Bills passed, regulations killed, border, military, ISIS, SC!',
-        source: '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
-        created_at: 'Fri Aug 25 10:44:17 +0000 2017',
-        retweet_count: 15628,
-        favorite_count: 70984
-    }
-];
-
-
-
-function bulkCreate(tweets) {
-    Tweet.bulkCreate(tweets)
+function bulkCreate(tweets) { //raw: true
+    return Tweet.bulkCreate(tweets)
         .then(() => {
+            console.log('Number of inserted tweets: ', tweets.length);
             return Tweet.findAll();
         })
-        .then(tweets => console.log("inserted tweets: ", tweets));
 }
 
 (function () {
-    console.log("Initializing database");
-    bulkCreate(test);
+    console.log('Initializing database.');
+
+    fetchTweets(options)
+        .then(data => {
+            bulkCreate(data)
+                .then(data => console.log('Bulk save finished.'))
+                .catch(err => res.render('error', {error, err}))
+        })
+        .catch(err => console.log('error: ', err));
 })();
 
 
