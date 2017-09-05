@@ -13,7 +13,7 @@ Application is using MySql for data storage. Create database with corresponding 
 using `create database <database_name> character set utf8mb4 COLLATE utf8mb4_unicode_ci;`. This will ensure we can store any
 potentially weird characters (ex. emoji). After you have created your database, run seed script using command
 `npm run initialize-db`. This will fetch all tweets posted by Trump after Inauguration day, starting with
-> ![alt text](https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg "Profile picture") My Administration will follow two simple rules: https://t.co/ZWk0j4H8Qy
+> ![alt text](https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg "Profile picture") My Administration will follow two simple rules: BUY AMERICAN and HIRE AMERICAN! #USA
 
 Currently max number of fetched tweets is 10 000. You can change it in [options](https://github.com/vukoviciv/trumpTweetsVisualisation/blob/master/lib/options.js#L2 "maxNumberOfTweets").
 This is tested for the amount of ~1500 tweets.
