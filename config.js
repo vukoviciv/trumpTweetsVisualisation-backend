@@ -1,7 +1,7 @@
 const fs = require('fs');
 const twitterConfig = JSON.parse(fs.readFileSync('./twitterAccount.json'));
 
-const env = process.env.NODE_ENV || 'test';
+const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/config/config.json')[env];
 
 // DB connection
