@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+/**
+ * First create database using command
+ *          create database <database_name> character set utf8mb4 COLLATE utf8mb4_unicode_ci;
+ * After that, run this script with
+ *          npm run initialize-db
+ *
+ * Script will create table and store all current tweets (up to 10000; see config.json). After that, just use functions
+ * for updating tweets.
+ **/
+
+const models = require('../models');
+
+const options = require('../lib/options');
+const fetchTweets = require('../lib/helpers');
+
+const Tweet = models.Tweet;
+
+models.sequelize.sync();
+
+function bulkCreate(tweets) { //raw: true
+    return Tweet.bulkCreate(tweets)
+        .then(() => {
+            console.log('Number of inserted tweets: ', tweets.length);
+            return Tweet.findAll();
+        })
+}
+
+(function () {
+    console.log('Initializing database.');
+
+    fetchTweets(options)
+        .then(data => {
+            bulkCreate(data)
+                .then(data => console.log('Bulk save finished.'))
+                .catch(err => res.render('error', {error, err}))
+        })
+        .catch(err => console.log('error: ', err));
+})();
+
+
