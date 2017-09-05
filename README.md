@@ -8,6 +8,20 @@ which words he wants to be displayed.
 
 ## How to use this app
 
+In order to use Twitter API you will need to create your own Twitter account. After you have account, create an application so you can get your access tokens.
+For more info see: [Twitter access tokens](https://dev.twitter.com/webhooks/access-tokens). You will have to save it in .json file named *twitterAccount.json*.
+File should contain this object (don't forget to swap the values with the real ones you get from Twitter) :
+
+ ```javascript
+ {
+    "consumer_key": "Consumer Key (API Key)",
+    "consumer_secret": "Consumer Secret (API Secret)",
+    "access_token": "Access Token",
+    "access_token_secret": "Access Token Secret	"
+}
+
+ ```
+
 Application is using MySql for data storage. Create database with corresponding name
 (see [config.json](https://github.com/vukoviciv/trumpTweetsVisualisation/blob/master/config/config.json "JSON config file"))
 using `create database <database_name> character set utf8mb4 COLLATE utf8mb4_unicode_ci;`. This will ensure we can store any
