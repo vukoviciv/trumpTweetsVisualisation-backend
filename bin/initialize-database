@@ -10,12 +10,13 @@
  **/
 
 const models = require('../models');
-models.sequelize.sync();
 
 const options = require('../lib/options');
 const fetchTweets = require('../lib/helpers');
 
 const Tweet = models.Tweet;
+
+models.sequelize.sync();
 
 function bulkCreate(tweets) { //raw: true
     return Tweet.bulkCreate(tweets)

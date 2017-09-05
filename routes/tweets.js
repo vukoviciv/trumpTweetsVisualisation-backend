@@ -16,14 +16,11 @@ router.get('/update', (req, res) => {
 
     tweetRepository.getNewestTweet()
         .then(lastTweet => {
-
-            console.log(lastTweet.id_str, lastTweet.full_text);
-
             options.sinceId = lastTweet.id_str;
             fetchTweets(options)
                 .then(data => {
                     tweetRepository.saveBulk(data)
-                        .then(data => console.log(data))
+                        .then(data => console.log("Saving in bulk."))
                         .catch(err => res.render('error', {error: err}))
                 })
                 .then(data => res.redirect(redirectRoute))
