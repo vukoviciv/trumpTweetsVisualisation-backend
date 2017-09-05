@@ -4,6 +4,7 @@
     "password": "root",
     "database": "trump_tweets",
     "host": "127.0.0.1",
+    "dialect": "mysql",
     "dialectOptions": {
       "charset": "utf8mb4"
     }
@@ -13,6 +14,7 @@
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
+    "dialect": "mysql",
     "dialectOptions": {
       "charset": "utf8mb4"
     }
