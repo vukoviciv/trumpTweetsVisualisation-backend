@@ -16,7 +16,12 @@ const fetchTweets = require('../lib/helpers');
 
 const Tweet = models.Tweet;
 
-models.sequelize.sync();
+models.sequelize.sync()
+    .then(() => {
+        console.log('DB synced');
+        initializeDatabase();
+    })
+    .catch(err => console.log(err));
 
 function bulkCreate(tweets) { //raw: true
     return Tweet.bulkCreate(tweets)
@@ -26,16 +31,15 @@ function bulkCreate(tweets) { //raw: true
         })
 }
 
-(function () {
+function initializeDatabase() {
     console.log('Initializing database.');
 
     fetchTweets(options)
         .then(data => {
-            bulkCreate(data)
+            const reversedData = data.reverse(); // reverse data so we have newest tweet last wrote in db
+            bulkCreate(reversedData)
                 .then(data => console.log('Bulk save finished.'))
                 .catch(err => res.render('error', {error, err}))
         })
         .catch(err => console.log('error: ', err));
-})();
-
-
+}

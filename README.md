@@ -3,12 +3,12 @@
 
 - [x] Write script for initializing database
 - [ ] Implement elastic search
-- [ ] visualise data (display the most used words). For start they will be predefined. In the future it would be great to allow user to choose
+- [ ] visualise data (display the most used words). For start they will be predefined. In the future it would be great to allow users to choose
 which words he wants to be displayed.
 
 ## How to use this app
 
-In order to use Twitter API you will need to create your own Twitter account. After you have account, create an application so you can get your access tokens.
+In order to use Twitter API you will need to create your own Twitter account. After you have an account, create an application so you can get your access tokens.
 For more info see: [Twitter access tokens](https://dev.twitter.com/webhooks/access-tokens). You will have to save it in .json file named *twitterAccount.json*, placed in root folder.
 File should contain this object (don't forget to swap the values with the real ones you get from Twitter) :
 
