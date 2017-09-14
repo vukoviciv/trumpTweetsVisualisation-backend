@@ -5,10 +5,6 @@ const tweetRepository = require('../repositories/tweetRepository');
 
 const fetchTweets = require('../lib/helpers');
 
-// TEMP
-const models = require('../models');
-const Tweet = models.Tweet;
-
 router.get('/', (req, res) => {
     tweetRepository.fetchAll()
         .then(data => {
