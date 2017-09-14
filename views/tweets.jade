@@ -1,12 +1,20 @@
 extends layout
 
 block content
-    h1 Tweets
+    div.content
+        div.main-container
+            div.header
+                div.header-background
+                    img(src='https://pbs.twimg.com/profile_banners/25073877/1505015712/1500x500')
+                div.header-profile-picture
+                    div.profile-picture-container
+                        img(src='https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg')
+                div.button-container
+                    div.button Get new tweets
 
-    div.button Save current tweets
-
-    ol
-        each tweet, i in tweets
-            li
-                span #{tweet.full_text}
-                span @#{tweet.created_at}
+            div.tweets-container
+                ol
+                    each tweet, i in tweets
+                        li.tweet
+                            span.text #{tweet.full_text}
+                            span.time @#{tweet.created_at}
