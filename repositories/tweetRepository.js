@@ -1,4 +1,5 @@
 const models = require('../models');
+const Tweet = models.Tweet;
 
 // example of tweet
 //const test = {
@@ -11,7 +12,7 @@ const models = require('../models');
 //};
 
 function saveOne(tweet) {
-    return models.Tweet.findOrCreate({
+    return Tweet.findOrCreate({
             where: {id_str: tweet.id_str},
             defaults: tweet
         })
@@ -21,32 +22,21 @@ function saveOne(tweet) {
 }
 
 function saveBulk(tweets) {
-    return Promise.all(tweets.map(tweet => {
-        return saveOne(tweet)
-            .then((tweet, created) => {
-                // TODO this is undefined. why?
-                console.log("tweet", tweet);
-                console.log("created", created);
-                // I need id's of created ones, to highlight them later in view.
-                return created
-            });
-    }));
+    return Tweet.bulkCreate(tweets)
+        .then(() => {
+            console.log('Number of inserted tweets: ', tweets.length);
+            return tweets.length;
+        })
 }
 
 function fetchAll() {
-    return models.Tweet.findAll().then(tweets => tweets);
+    return Tweet.findAll()
+        .then(tweets => tweets);
 }
 
 function getNewestTweet() {
-    return models.Tweet.findOne({
+    return Tweet.findOne({
         order: [['id_str', 'DESC']]
-    }).then(one => one)
-}
-
-/* Oldest tweet will have newest biggest ID in db. It because we are fetching in preset -> past timeline */
-function getOldestTweet() {
-    return models.Tweet.findOne({
-        order: [['id_str', 'ASC']]
     }).then(one => one)
 }
 
@@ -54,6 +44,5 @@ module.exports = {
     saveOne,
     saveBulk,
     fetchAll,
-    getNewestTweet,
-    getOldestTweet
+    getNewestTweet
 };
