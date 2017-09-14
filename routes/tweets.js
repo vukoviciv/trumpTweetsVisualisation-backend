@@ -5,12 +5,32 @@ const tweetRepository = require('../repositories/tweetRepository');
 
 const fetchTweets = require('../lib/helpers');
 
+// TEMP
+const models = require('../models');
+const Tweet = models.Tweet;
+
 router.get('/', (req, res) => {
     tweetRepository.fetchAll()
         .then(data => {
-            res.render('tweets', {tweets: data.reverse()})
+            res.render('tweets', {
+                tweets: data.reverse(),
+                baseUrl: 'tweets/'
+            })
         })
         .catch((err) => res.render('error', {error: err}));
+});
+
+router.get('/:page', (req, res)=> {
+    let page = req.params.page;
+    let limit = 50;
+
+    tweetRepository.fetchPage(page,limit)
+        .then(
+            data => {
+                console.log("data: ", data);
+                res.status(200).json({'result': data})
+            }
+        );
 });
 
 router.get('/update', (req, res) => {
