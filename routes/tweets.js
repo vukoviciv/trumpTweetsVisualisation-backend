@@ -20,12 +20,9 @@ router.get('/:page', (req, res)=> {
     let page = req.params.page;
     let limit = 50;
 
-    tweetRepository.fetchPage(page,limit)
+    tweetRepository.fetchPage(page, limit)
         .then(
-            data => {
-                console.log("data: ", data);
-                res.status(200).json({'result': data})
-            }
+            data => res.status(200).json({'result': data})
         );
 });
 
