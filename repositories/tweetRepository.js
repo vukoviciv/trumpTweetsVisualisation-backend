@@ -29,6 +29,18 @@ function saveBulk(tweets) {
         })
 }
 
+function fetchPage(pageNumber, limit) {
+    let offset = limit * (pageNumber - 1);
+
+    return Tweet.findAndCountAll({
+            attributes: ['id', 'id_str', 'full_text', 'created_at'],
+            limit: limit,
+            offset: offset,
+            order: '`id` DESC'
+        })
+        .then(data => data)
+}
+
 function fetchAll() {
     return Tweet.findAll()
         .then(tweets => tweets);
@@ -44,5 +56,6 @@ module.exports = {
     saveOne,
     saveBulk,
     fetchAll,
+    fetchPage,
     getNewestTweet
 };

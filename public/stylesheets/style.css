@@ -74,6 +74,11 @@ body {
     color: #f6f6f6;
 }
 
+.button a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .button:hover {
     background-color: #1B95E0;
     border-color: #1B95E0;
