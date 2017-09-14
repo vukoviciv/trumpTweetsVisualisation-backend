@@ -8,8 +8,7 @@ const fetchTweets = require('../lib/helpers');
 router.get('/', (req, res) => {
     tweetRepository.fetchAll()
         .then(data => {
-            tweetRepository.getNewestTweet().then(tweet => console.log(tweet.full_text));
-            res.render('tweets', {tweets: data})
+            res.render('tweets', {tweets: data.reverse()})
         })
         .catch((err) => res.render('error', {error: err}));
 });
