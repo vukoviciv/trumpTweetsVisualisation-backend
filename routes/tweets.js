@@ -42,7 +42,7 @@ router.get('/:page', (req, res)=> {
 
     tweetRepository.fetchPage(page, limit)
         .then(
-            data => res.status(200).json({'result': data})
+            data => res.status(200).json({'tweets': data.rows})
         );
 });
 
