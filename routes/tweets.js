@@ -10,20 +10,10 @@ router.get('/', (req, res) => {
         .then(data => {
             res.render('tweets', {
                 tweets: data.reverse(),
-                baseUrl: 'tweets/'
+                baseUrl: 'tweets'
             })
         })
         .catch((err) => res.render('error', {error: err}));
-});
-
-router.get('/:page', (req, res)=> {
-    let page = req.params.page;
-    let limit = 50;
-
-    tweetRepository.fetchPage(page, limit)
-        .then(
-            data => res.status(200).json({'result': data})
-        );
 });
 
 router.get('/update', (req, res) => {
@@ -44,6 +34,16 @@ router.get('/update', (req, res) => {
                 .catch(err => res.render('error', {error: err}))
         })
         .catch(err => console.log(err));
+});
+
+router.get('/:page', (req, res)=> {
+    let page = req.params.page;
+    let limit = 50;
+
+    tweetRepository.fetchPage(page, limit)
+        .then(
+            data => res.status(200).json({'result': data})
+        );
 });
 
 module.exports = router;
