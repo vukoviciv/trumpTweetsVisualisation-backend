@@ -6,14 +6,27 @@ const tweetRepository = require('../repositories/tweetRepository');
 const fetchTweets = require('../lib/helpers');
 
 router.get('/', (req, res) => {
-    tweetRepository.fetchAll()
+    console.log("sasdsdsa");
+    let page = req.params.page;
+    let limit = 50;
+
+    tweetRepository.fetchPage(page, limit)
         .then(data => {
             res.render('tweets', {
-                tweets: data.reverse(),
+                tweets: data.rows,
                 baseUrl: 'tweets'
             })
         })
         .catch((err) => res.render('error', {error: err}));
+
+    //tweetRepository.fetchAll()
+    //    .then(data => {
+    //        res.render('tweets', {
+    //            tweets: data.reverse(),
+    //            baseUrl: 'tweets'
+    //        })
+    //    })
+    //    .catch((err) => res.render('error', {error: err}));
 });
 
 router.get('/update', (req, res) => {
