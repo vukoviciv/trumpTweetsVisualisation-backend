@@ -1,3 +1,6 @@
+script
+    include ../public/js/clickHandlers.js
+
 ol
     each tweet, i in tweets
         li.tweet
@@ -5,4 +8,5 @@ ol
             span.time @#{tweet.created_at}
 
         if i == tweets.length - 1
-            span LOAD MORE
+            a(onclick=`handleOnClickLoadMore(${nextPageUrl})`) LOAD MORE
+

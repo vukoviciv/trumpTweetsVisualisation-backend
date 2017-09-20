@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const options = require('../lib/options');
@@ -7,15 +6,16 @@ const tweetRepository = require('../repositories/tweetRepository');
 const fetchTweets = require('../lib/helpers');
 
 router.get('/', (req, res) => {
-    console.log("sasdsdsa");
-    let page = req.params.page;
+    let page = 1;
     let limit = 50;
 
     tweetRepository.fetchPage(page, limit)
         .then(data => {
+            page++;
             res.render('tweets', {
                 tweets: data.rows,
-                baseUrl: 'tweets'
+                baseUrl: 'tweets',
+                nextPageUrl: `${page}`
             })
         })
         .catch((err) => res.render('error', {error: err}));
@@ -47,7 +47,13 @@ router.get('/:page', (req, res)=> {
 
     tweetRepository.fetchPage(page, limit)
         .then(
-            data => res.status(200).json({'tweets': data.rows})
+            data => {
+                page++;
+                res.render('tweetsPage', {
+                    tweets: data.rows,
+                    nextPageUrl: `${page}`
+                })
+            }
         );
 });
 
