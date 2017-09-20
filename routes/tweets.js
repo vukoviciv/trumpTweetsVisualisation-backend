@@ -19,15 +19,6 @@ router.get('/', (req, res) => {
             })
         })
         .catch((err) => res.render('error', {error: err}));
-
-    //tweetRepository.fetchAll()
-    //    .then(data => {
-    //        res.render('tweets', {
-    //            tweets: data.reverse(),
-    //            baseUrl: 'tweets'
-    //        })
-    //    })
-    //    .catch((err) => res.render('error', {error: err}));
 });
 
 router.get('/update', (req, res) => {
