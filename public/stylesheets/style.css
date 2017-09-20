@@ -3,8 +3,6 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
 }
 
 body {
@@ -107,4 +105,8 @@ li.tweet .time {
     margin-left: 1rem;
     font-size: .8rem;
     color: rgb(101, 119, 134);
+}
+
+#load-more {
+	display:none;
 }
