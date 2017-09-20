@@ -1,12 +1,11 @@
 script
     include ../public/js/clickHandlers.js
 
-ol
+ol#tweet-items-container
     each tweet, i in tweets
         li.tweet
             span.text #{tweet.full_text}
             span.time @#{tweet.created_at}
 
-        if i == tweets.length - 1
-            a(onclick=`handleOnClickLoadMore(${nextPageUrl})`) LOAD MORE
+a(onclick=`handleOnClickLoadMore(${nextPageUrl})`)#load-more LOAD MORE
 

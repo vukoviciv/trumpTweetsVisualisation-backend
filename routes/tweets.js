@@ -49,7 +49,7 @@ router.get('/:page', (req, res)=> {
         .then(
             data => {
                 page++;
-                res.render('tweetsPage', {
+                res.json({
                     tweets: data.rows,
                     nextPageUrl: `${page}`
                 })
