@@ -2,8 +2,8 @@
 (Just learning some stuff. Tech stuff. Not Trump stuff.)
 
 - [x] Script for initializing database
-- :construction: Pagination
-- [ ] Endless scroll
+- [x] Pagination
+- [x] Endless scroll
 - [ ] Elastic search
 - [ ] visualise data (display the most used words). For start they will be predefined. In the future it would be great to allow users to choose
 which words he wants to be displayed.

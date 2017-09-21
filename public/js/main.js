@@ -8,7 +8,7 @@ function fetchNewPage() {
         .then(res =>  res.json())
         .then(data => data.tweets.map(tweet => getTweetHTMLcomponent(tweet)))
         .then(tweets => {
-            let listElement = document.getElementById('tweet-items-container');
+            const listElement = document.getElementById('tweet-items-container');
             tweets.forEach(el => listElement.insertAdjacentHTML('beforeend', el));
             page++;
         });
