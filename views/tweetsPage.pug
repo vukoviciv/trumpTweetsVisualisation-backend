@@ -1,0 +1,8 @@
+ol#tweet-items-container
+    each tweet, i in tweets
+        li.tweet
+            span.text #{tweet.full_text}
+            span.time @#{tweet.created_at}
+
+div#load-more LOAD MORE
+

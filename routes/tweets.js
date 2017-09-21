@@ -6,24 +6,19 @@ const tweetRepository = require('../repositories/tweetRepository');
 const fetchTweets = require('../lib/helpers');
 
 router.get('/', (req, res) => {
-    tweetRepository.fetchAll()
-        .then(data => {
-            res.render('tweets', {
-                tweets: data.reverse(),
-                baseUrl: 'tweets/'
-            })
-        })
-        .catch((err) => res.render('error', {error: err}));
-});
-
-router.get('/:page', (req, res)=> {
-    let page = req.params.page;
+    let page = 1;
     let limit = 50;
 
     tweetRepository.fetchPage(page, limit)
-        .then(
-            data => res.status(200).json({'result': data})
-        );
+        .then(data => {
+            page++;
+            res.render('tweets', {
+                tweets: data.rows,
+                baseUrl: 'tweets',
+                nextPageUrl: `${page}`
+            })
+        })
+        .catch((err) => res.render('error', {error: err}));
 });
 
 router.get('/update', (req, res) => {
@@ -44,6 +39,22 @@ router.get('/update', (req, res) => {
                 .catch(err => res.render('error', {error: err}))
         })
         .catch(err => console.log(err));
+});
+
+router.get('/:page', (req, res)=> {
+    let page = req.params.page;
+    let limit = 50;
+
+    tweetRepository.fetchPage(page, limit)
+        .then(
+            data => {
+                page++;
+                res.json({
+                    tweets: data.rows,
+                    nextPageUrl: `${page}`
+                })
+            }
+        );
 });
 
 module.exports = router;

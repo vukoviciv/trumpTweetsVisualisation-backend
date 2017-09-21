@@ -1,21 +1,17 @@
 extends layout
 
 block content
-    div.content
+    div#app.content
         div.main-container
             div.header
                 div.header-background
-                    img(src='https://pbs.twimg.com/profile_banners/25073877/1505015712/1500x500')
+                    img(src='https://pbs.twimg.com/profile_banners/25073877/1505521405/1500x500')
                 div.header-profile-picture
                     div.profile-picture-container
                         img(src='https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg')
                 div.button-container
                     div.button
-                        a(href='#{baseUrl}/update') Get new tweets
+                        a(href=`/${baseUrl}/update`) Get new tweets
 
             div.tweets-container
-                ol
-                    each tweet, i in tweets
-                        li.tweet
-                            span.text #{tweet.full_text}
-                            span.time @#{tweet.created_at}
+                include tweetsPage

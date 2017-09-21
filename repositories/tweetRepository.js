@@ -30,13 +30,13 @@ function saveBulk(tweets) {
 }
 
 function fetchPage(pageNumber, limit) {
-    let offset = limit * (pageNumber - 1);
+    let offset = pageNumber ? limit * (pageNumber - 1) : 0;
 
     return Tweet.findAndCountAll({
             attributes: ['id', 'id_str', 'full_text', 'created_at'],
             limit: limit,
             offset: offset,
-            order: '`id` DESC'
+            order: [['id', 'DESC']]
         })
         .then(data => data)
 }
