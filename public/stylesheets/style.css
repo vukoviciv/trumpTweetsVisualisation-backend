@@ -2,6 +2,9 @@ g.text-container text {
   fill: #ffffff;
   font-weight: bold; }
 
+g.legend-container text {
+  text-transform: lowercase; }
+
 body, html {
   margin: 0;
   padding: 0; }
