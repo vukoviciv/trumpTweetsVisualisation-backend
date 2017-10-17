@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    script(src='https://d3js.org/d3.v4.js')
+    script.
+        var tweets= !{tweets}
+
+    svg#graph-container
+
+    script(src='/js/graph.js')

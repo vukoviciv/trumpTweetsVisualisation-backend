@@ -1,15 +1,17 @@
 const models = require('../models');
 const Tweet = models.Tweet;
 
-// example of tweet
-//const test = {
-//    id_str: '901032475111116800',
-//    full_text: 'Few, if any, Administrations have done more in just 7 months than the Trump A. Bills passed, regulations killed, border, military, ISIS, SC!',
-//    source: '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
-//    created_at: 'Fri Aug 25 10:44:17 +0000 2017',
-//    retweet_count: 15628,
-//    favorite_count: 70984
-//};
+/*  Example of a tweet
+
+ const test = {
+ id_str: '901032475111116800',
+ full_text: 'Few, if any, Administrations have done more in just 7 months than the Trump A. Bills passed, regulations killed, border, military, ISIS, SC!',
+ source: '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
+ created_at: 'Fri Aug 25 10:44:17 +0000 2017',
+ retweet_count: 15628,
+ favorite_count: 70984
+ };
+ */
 
 function saveOne(tweet) {
     return Tweet.findOrCreate({
@@ -42,7 +44,10 @@ function fetchPage(pageNumber, limit) {
 }
 
 function fetchAll() {
-    return Tweet.findAll()
+    return Tweet.findAll({
+            attributes: ['id', 'id_str', 'full_text', 'created_at'],
+            raw: true
+        })
         .then(tweets => tweets);
 }
 
