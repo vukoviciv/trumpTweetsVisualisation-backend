@@ -4,7 +4,6 @@ const tweetRepository = require('../repositories/tweetRepository');
 const analysedataAnalyser = require('../lib/analyseData');
 const { words } = require('../lib/options');
 
-
 router.get('/', (req, res) => {
     tweetRepository.fetchAll() // switch to fetchAll after
         .then(data => analysedataAnalyser.extractTextProperties(data))

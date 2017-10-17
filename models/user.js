@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
         profile_image_url: DataTypes.STRING,
         profile_image_url_https: DataTypes.STRING,
         profile_banner_url: DataTypes.STRING
-
     }, {
         classMethods: {
             associate: models => {

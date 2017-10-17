@@ -37,7 +37,6 @@ router.get('/update', (req, res) => {
     tweetRepository.getNewestTweet()
         .then(lastTweet => {
             options.queryParams.since_id = lastTweet.id_str;
-            let numberOfNewTweets;
 
             fetchLastRawTweet(lastTweet.id_str, options.tweetsUrl)
                 .then(({data, resp}) => {
@@ -50,7 +49,7 @@ router.get('/update', (req, res) => {
                 .then(data => {
                     const reversedData = data.reverse(); // reverse data so we have newest tweet last wrote in db
                     tweetRepository.saveBulk(reversedData)
-                        .then(data => { numberOfNewTweets = data; })
+                        .then(data => { console.log("Number of saved tweets: ", data); })
                         .catch(err => res.render('error', {error: err}))
                 })
                 .then(data => res.redirect(redirectRoute))
@@ -74,6 +73,5 @@ router.get('/:page', (req, res) => {
             }
         );
 });
-
 
 module.exports = router;
