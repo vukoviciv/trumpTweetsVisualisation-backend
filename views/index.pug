@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.question-container
+    div.row
+      div.large-text-container
+        h1= 'Would you like to'
+      div.large-button-container
+        a(href=`${routes.tweets}`) read
+    div.row
+      div.large-text-container
+        h1 or just to
+      div.large-button-container
+        a(href=`${routes.graph}`) watch?
+
