@@ -7,10 +7,10 @@ block content
         div.main-container
             div.header
                 div.header-background
-                    img(src='https://pbs.twimg.com/profile_banners/25073877/1505521405/1500x500')
+                    img(src=`${profile.banner}`)
                 div.header-profile-picture
                     div.profile-picture-container
-                        img(src='https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg')
+                        img(src=`${profile.image}`)
                 div.button-container
                     div.button
                         a(href=`/${baseUrl}/update`) Get new tweets
