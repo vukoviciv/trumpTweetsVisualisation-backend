@@ -1,14 +1,14 @@
-let width = window.innerWidth-10,
-    height = window.innerHeight-10;
+let width = window.innerWidth - 10,
+    height = window.innerHeight - 10;
 
 let nodes = tweets,
-    color = d3.scaleOrdinal(d3.schemeCategory10);
+    color = d3.scaleOrdinal(d3.schemeCategory20);
 
-const forceX = d3.forceX(width / 2).strength(0.045);
-const forceY = d3.forceY(height / 2).strength(0.045);
+const forceX = d3.forceX(width / 2).strength(0.07);
+const forceY = d3.forceY(height / 2).strength(0.07);
 
 let force = d3.forceSimulation()
-    .velocityDecay(0.2)
+    .velocityDecay(0.1)
     .force('x', forceX)
     .force('y', forceY)
     .force('collide', d3.forceCollide().radius(getRadius).iterations(1))
@@ -28,18 +28,23 @@ let textContainer = svg
 
 let circles = circlesContainer
     .selectAll('circle')
-    .data(nodes)
-    .enter().append('circle')
+    .data(nodes.filter(node => node.count > 0))
+    .enter()
+    .append('circle');
+
+let circlesAttributes = circles
     .attr('r', getRadius)
     .style('fill', (d, i) => color(i))
     .append('title')
     .text(d => `${d.word} (${d.count})`);
 
+
 let texts = textContainer
     .selectAll('text')
-    .data(nodes.filter(node=>node.count > 30))
+    .data(nodes.filter(node => node.count > 30))
     .enter().append('text')
     .attr('text-anchor', 'middle')
+    .style('font-size', d => getFontSizeInUnits(d))
     .text(d => d.word);
 
 /* LEGEND */
@@ -69,7 +74,11 @@ legendContainer.selectAll('text')
 /* HELPER FUNCTIONS */
 
 function getRadius(d) {
-    return d.count;
+    return d.count * 0.8;
+}
+
+function getFontSizeInUnits(d) {
+    return d.count / 2;
 }
 
 function ticked(e) {
@@ -79,5 +88,5 @@ function ticked(e) {
 
     textContainer.selectAll('text')
         .attr('x', d => d.x)
-        .attr('y', d => d.y);
+        .attr('y', d => d.y + getFontSizeInUnits(d) / 3);
 }
