@@ -78,7 +78,7 @@ function getRadius(d) {
 }
 
 function getFontSizeInUnits(d) {
-    return d.count / 2;
+    return getRadius(d) / 2;
 }
 
 function ticked(e) {
