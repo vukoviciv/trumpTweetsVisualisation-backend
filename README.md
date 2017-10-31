@@ -5,8 +5,8 @@
 - [x] Pagination
 - [x] Endless scroll
 - [ ] Elastic search
-- [ ] visualise data (display the most used words). For start they will be predefined. In the future it would be great to allow users to choose
-which words he wants to be displayed.
+- [x] visualise data (display the most used words). For start they will be predefined. 
+- [ ] Allow user to choose words 
 
 ## How to use this app
 
