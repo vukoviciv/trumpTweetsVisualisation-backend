@@ -1,12 +1,24 @@
+$textColor: #fff;
+
+.main-graph-container {
+  display: flex;
+  align-items: stretch;
+}
+
+
 g.text-container {
   text {
-    fill: #ffffff;
+    fill: $textColor;
     font-weight: bold;
   }
 }
 
-g.legend-container {
-  text {
-    text-transform: lowercase;
+svg#legend-container{
+  height: 100%;
+
+  g.legend-container {
+    text {
+      text-transform: lowercase;
+    }
   }
 }

@@ -5,6 +5,12 @@ block content
     script.
         var tweets= !{tweets}
 
-    svg#graph-container
+    div.main-graph-container
+        div.left-container
+            svg#legend-container
+                button.new-words I want my own words!
+
+        div.right-container
+            svg#graph-container
 
     script(src='/js/graph.js')
