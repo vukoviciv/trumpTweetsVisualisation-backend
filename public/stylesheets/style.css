@@ -110,9 +110,15 @@ body {
   .tweets-container #load-more {
     display: none; }
 
+.main-graph-container {
+  display: flex;
+  align-items: stretch; }
+
 g.text-container text {
-  fill: #ffffff;
+  fill: #fff;
   font-weight: bold; }
 
-g.legend-container text {
-  text-transform: lowercase; }
+svg#legend-container {
+  height: 100%; }
+  svg#legend-container g.legend-container text {
+    text-transform: lowercase; }
