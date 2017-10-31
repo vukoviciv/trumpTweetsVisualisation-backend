@@ -1,0 +1,20 @@
+div.modal#edit-words-list
+        div.modal-background
+        div.modal-card
+            header.modal-card-head
+                p.modal-card-title My new words list                
+            section.modal-card-body
+                div.content
+                    ul#new-words-list
+                    div.field
+                        label.label Word
+                        div.control
+                            input.input#input-word(type='text' placeholder='Enter new word')
+                        div.control
+                            button.button.is-primary.is-outlined#add-word Submit    
+                            
+            footer.modal-card-foot
+                button.button.is-success#submit Save new list
+                button.button#cancel I changed my mind
+
+script(src='/js/graph/wordsList.js')

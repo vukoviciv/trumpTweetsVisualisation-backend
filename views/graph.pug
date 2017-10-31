@@ -13,12 +13,8 @@ block content
                     span Let me build my own words list!          
 
         div.right-container
-            svg#graph-container
-
-    div.modal#edit-words-list
-        div.modal-background
-        div.modal-content
-        button.modal-close.is-large#close-words-modal(area-label='close')       
-
+            svg#graph-container    
+        include modal
+        
     script(src='/js/graph/d3graph.js')
     script(src='/js/graph/main.js')

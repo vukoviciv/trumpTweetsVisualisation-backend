@@ -1,5 +1,5 @@
 const openModalButton = document.getElementById('words-modal');
-const closeModalButton = document.getElementById('close-words-modal');
+const closeModalButton = document.getElementById('cancel');
 const modalBody = document.getElementById('edit-words-list');
 
 openModalButton.onclick = () => {
