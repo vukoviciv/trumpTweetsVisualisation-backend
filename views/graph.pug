@@ -9,15 +9,16 @@ block content
         div.left-container
             svg#legend-container
             div.button-container
-                div.button
-                    a(href='graph/words') Let me build my own words list!          
+                div.button#words-modal
+                    span Let me build my own words list!          
 
         div.right-container
             svg#graph-container
 
-    div.modal
+    div.modal#edit-words-list
         div.modal-background
         div.modal-content
-        button.modal-close.is-large(area-label='close')       
+        button.modal-close.is-large#close-words-modal(area-label='close')       
 
-    script(src='/js/graph.js')
+    script(src='/js/graph/d3graph.js')
+    script(src='/js/graph/main.js')
