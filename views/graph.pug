@@ -8,9 +8,16 @@ block content
     div.main-graph-container
         div.left-container
             svg#legend-container
-                button.new-words I want my own words!
+            div.button-container
+                div.button
+                    a(href='graph/words') Let me build my own words list!          
 
         div.right-container
             svg#graph-container
+
+    div.modal
+        div.modal-background
+        div.modal-content
+        button.modal-close.is-large(area-label='close')       
 
     script(src='/js/graph.js')
