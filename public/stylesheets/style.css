@@ -48,73 +48,70 @@ body {
 
 #app {
   background-color: #f6f6f6; }
-
-.main-container {
-  max-width: 64rem;
-  width: 100%;
-  margin: 0 auto; }
-
-.header {
-  position: relative; }
-  .header .header-background img {
+  #app .main-container {
+    max-width: 64rem;
     width: 100%;
-    border-radius: 2rem; }
-  .header .header-profile-picture {
-    position: absolute;
-    left: -0.5rem;
-    bottom: -3.5rem; }
-    .header .header-profile-picture .profile-picture-container {
-      position: relative;
-      height: 12.5rem;
-      width: 12.5rem;
-      background: #f6f6f6;
-      border: .4rem solid #f6f6f6;
-      border-radius: 50%; }
-      .header .header-profile-picture .profile-picture-container img {
-        width: 100%;
-        height: 100%;
+    margin: 0 auto; }
+  #app .header {
+    position: relative; }
+    #app .header .header-background img {
+      width: 100%;
+      border-radius: 2rem; }
+    #app .header .header-profile-picture {
+      position: absolute;
+      left: -0.5rem;
+      bottom: -3.5rem; }
+      #app .header .header-profile-picture .profile-picture-container {
+        position: relative;
+        height: 12.5rem;
+        width: 12.5rem;
+        background: #f6f6f6;
+        border: .4rem solid #f6f6f6;
         border-radius: 50%; }
-  .header .button-container {
-    position: absolute;
-    right: 0;
-    left: 12.5rem;
-    bottom: -3rem; }
-    .header .button-container .button {
-      position: relative;
-      padding: .4rem 1rem;
-      border-radius: 6rem;
-      box-shadow: none;
-      cursor: pointer;
-      font-weight: bold;
-      line-height: 2rem;
-      text-align: center;
-      background-color: #48AAE6;
-      border: 1px solid #1da1f2;
-      color: #f6f6f6; }
-      .header .button-container .button a {
-        display: block;
-        width: 100%;
-        height: 100%;
-        color: #fff;
-        text-decoration: none; }
-      .header .button-container .button:hover {
-        background-color: #1B95E0;
-        border-color: #1B95E0; }
-      .header .button-container .button:active {
-        box-shadow: 0 0 0 2px #f6f6f6, 0 0 0 4px #48AAE6; }
-
-.tweets-container {
-  margin-top: 4rem; }
-  .tweets-container li.tweet {
-    padding: .8rem; }
-    .tweets-container li.tweet:hover {
-      background-color: #E5EBEF; }
-    .tweets-container li.tweet .time {
-      margin-left: 1rem;
-      font-size: .8rem;
-      color: #657786; }
-  .tweets-container #load-more {
-    display: none; }
+        #app .header .header-profile-picture .profile-picture-container img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%; }
+    #app .header .button-container {
+      position: absolute;
+      right: 0;
+      left: 12.5rem;
+      bottom: -3rem; }
+      #app .header .button-container .twitter-button {
+        position: relative;
+        padding: .4rem 1rem;
+        border-radius: 6rem;
+        box-shadow: none;
+        cursor: pointer;
+        font-weight: bold;
+        line-height: 2rem;
+        text-align: center;
+        background-color: #48AAE6;
+        border: 1px solid #1da1f2;
+        color: #f6f6f6; }
+        #app .header .button-container .twitter-button a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color: #fff;
+          text-decoration: none; }
+        #app .header .button-container .twitter-button:hover {
+          background-color: #1B95E0;
+          border-color: #1B95E0; }
+        #app .header .button-container .twitter-button:active {
+          box-shadow: 0 0 0 2px #f6f6f6, 0 0 0 4px #48AAE6; }
+  #app .tweets-container {
+    margin-top: 4rem; }
+    #app .tweets-container li.tweet {
+      padding: .8rem; }
+      #app .tweets-container li.tweet:hover {
+        background-color: #E5EBEF; }
+      #app .tweets-container li.tweet .time {
+        margin-left: 1rem;
+        font-size: .8rem;
+        color: #657786; }
+    #app .tweets-container #load-more {
+      display: none; }
 
 .modal {
   bottom: 0;
@@ -1955,7 +1952,7 @@ body {
     bottom: 1em;
     left: 1em;
     width: 100%; }
-    .main-graph-container .button-container .button {
+    .main-graph-container .button-container .twitter-button {
       position: relative;
       padding: .4rem 1rem;
       border-radius: 6rem;
@@ -1967,10 +1964,10 @@ body {
       background-color: #48AAE6;
       border: 1px solid #1da1f2;
       color: #f6f6f6; }
-      .main-graph-container .button-container .button:hover {
+      .main-graph-container .button-container .twitter-button:hover {
         background-color: #1B95E0;
         border-color: #1B95E0; }
-      .main-graph-container .button-container .button:active {
+      .main-graph-container .button-container .twitter-button:active {
         box-shadow: 0 0 0 2px #f6f6f6, 0 0 0 4px #48AAE6; }
 
 g.text-container text {
