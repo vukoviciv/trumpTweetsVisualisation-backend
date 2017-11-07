@@ -11,8 +11,13 @@ openModalButton.onclick = () => {
 
   const wordList = el('ol#new-words-list');
   mount(modalContent, wordList, modalContent.firstChild);
+
+  const backgroundOverlay = document.querySelector('.modal .background-overlay');
+  backgroundOverlay.style.opacity = 1;
 };
 
 closeModalButton.onclick = () => {
   modalBody.classList.remove('is-active');
+  document.getElementById('new-words-list').remove();
+  document.getElementById('input-word').value = '';
 };
