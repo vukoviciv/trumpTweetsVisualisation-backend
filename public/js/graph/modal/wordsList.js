@@ -1,10 +1,10 @@
 const submitWordButton = document.getElementById('add-word');
-const wordsList = document.getElementById('new-words-list');
+const backgroundOverlay = document.querySelector('.modal .background-overlay');
 
 const submitWordHandler = () => {
-  const { mount } = window.redom;
   const inputElement = document.getElementById('input-word');
   const text = inputElement.value;
+  const wordsList = document.getElementById('new-words-list');
 
   if (!text) return;
 
@@ -12,12 +12,16 @@ const submitWordHandler = () => {
 
   inputElement.value = '';
   inputElement.focus();
+
+  backgroundOverlay.style.opacity = 1 - (wordsList.children.length * 0.05);
 };
 
 submitWordButton.onclick = submitWordHandler;
+
 document.querySelector('#input-word').addEventListener('keyup', (e) => {
   if (e.key === 'Enter') {
     submitWordButton.click();
     e.preventDefault();
   }
 });
+

@@ -2,15 +2,14 @@ div.modal#edit-words-list
         div.modal-background
         div.modal-card
             header.modal-card-head
-                p.modal-card-title My new words list                
+                div.field.has-addons
+                    div.control
+                        input.input#input-word(type='text' placeholder='Enter new word')
+                    div.control
+                        button.button.is-info#add-word Add                 
             section.modal-card-body
-                div.content
-                    ul#new-words-list
-                    div.field.has-addons
-                        div.control
-                            input.input#input-word(type='text' placeholder='Enter new word')
-                        div.control
-                            button.button.is-info#add-word Add    
+                div.background-overlay
+                div.content                    
                             
             footer.modal-card-foot
                 button.button.is-primary#submit Save new list

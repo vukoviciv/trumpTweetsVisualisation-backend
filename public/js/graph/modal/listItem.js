@@ -1,5 +1,3 @@
-const { el } = window.redom;
-
 class ListItem {
   constructor(word) {
     this.el = el(
