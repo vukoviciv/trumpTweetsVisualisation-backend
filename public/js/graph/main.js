@@ -4,6 +4,7 @@ const modalBody = document.getElementById('edit-words-list');
 
 openModalButton.onclick = () => {
   modalBody.classList.add('is-active');
+  document.getElementById('input-word').focus();
 };
 
 closeModalButton.onclick = () => {

@@ -1,0 +1,38 @@
+.modal-card .modal-card-body {
+  min-height: 20%;
+  line-height: 1.5;
+
+  .control {
+    box-sizing: border-box;
+    margin-bottom: 0.5em;
+  }    
+
+  input {
+    box-sizing: inherit;
+  }
+    
+  p {
+    margin: 0;
+  }
+
+  .word-wrapper {
+    max-width: 70%;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+        cursor: pointer;
+        border-bottom: 1px solid whitesmoke;
+    }
+  }
+
+  i.fa-times {
+    float: right;
+    color: #bcbcbc;
+    font-size: 18px;
+
+    &:hover {
+      color: red;
+    }
+  }
+}
+  

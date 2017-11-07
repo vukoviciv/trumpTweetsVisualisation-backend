@@ -1942,6 +1942,28 @@ body {
   .control.is-loading.is-large:after {
     font-size: 1.5rem; }
 
+.modal-card .modal-card-body {
+  min-height: 20%;
+  line-height: 1.5; }
+  .modal-card .modal-card-body .control {
+    box-sizing: border-box;
+    margin-bottom: 0.5em; }
+  .modal-card .modal-card-body input {
+    box-sizing: inherit; }
+  .modal-card .modal-card-body p {
+    margin: 0; }
+  .modal-card .modal-card-body .word-wrapper {
+    max-width: 70%;
+    border-bottom: 1px solid transparent; }
+    .modal-card .modal-card-body .word-wrapper:hover {
+      cursor: pointer;
+      border-bottom: 1px solid whitesmoke; }
+  .modal-card .modal-card-body i.fa-times {
+    float: right;
+    color: #bcbcbc; }
+    .modal-card .modal-card-body i.fa-times:hover {
+      color: red; }
+
 .main-graph-container {
   display: flex;
   align-items: stretch; }
@@ -1978,15 +2000,3 @@ svg#legend-container {
   height: 100%; }
   svg#legend-container g.legend-container text {
     text-transform: lowercase; }
-
-/* Modal */
-.modal-card .modal-card-body {
-  min-height: 20%;
-  line-height: 1.5; }
-  .modal-card .modal-card-body input.input {
-    width: 50%; }
-  .modal-card .modal-card-body .control {
-    margin-bottom: 0.5em; }
-
-.modal-card p {
-  margin: 0; }

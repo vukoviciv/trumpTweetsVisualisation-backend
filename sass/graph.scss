@@ -3,6 +3,8 @@
 
 @import '../node_modules/bulma/sass/elements/form';
 
+@import 'modal';
+
 $textColor: #fff;
 
 .main-graph-container {
@@ -61,26 +63,5 @@ svg#legend-container{
     text {
       text-transform: lowercase;
     }
-  }
-}
-
-/* Modal */
-
-.modal-card {
-  .modal-card-body {
-    min-height: 20%;
-    line-height: 1.5;
-    
-    input.input {
-      width: 50%;
-    }
-
-    .control {
-      margin-bottom: 0.5em;
-    }
-  }  
-
-  p {
-    margin: 0;
   }
 }
