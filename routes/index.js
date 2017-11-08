@@ -10,9 +10,16 @@ router.get('/', (req, res) => {
   };
 
   res.render('index', {
-    title: 'Tuturutututu',
     routes,
   });
+});
+
+router.post('/', (req, res) => {
+  // const routes = {
+  //   graph: '/graph',
+  // };
+  console.log(req.body);
+  res.send('POST to index');
 });
 
 module.exports = router;

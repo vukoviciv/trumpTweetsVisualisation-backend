@@ -15,8 +15,13 @@ router.get('/', (req, res) => {
     .catch(err => res.render('error', { error: err }));
 });
 
-router.get('/words', (req, res) => {
-  res.send('bravo');
+// router.get('/words', (req, res) => {
+//   eval(require('locus'));
+//   res.send('bravo');
+// });
+
+router.post('/words', (req, res) => {  
+  res.send('POST to AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
 });
 
 module.exports = router;
