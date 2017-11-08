@@ -8,7 +8,7 @@ $inputFieldHeight: 80px;
     z-index: 1;
 
     .field.has-addons {
-      width: 70%;
+      width: 100%;
       min-width: 50%;
     }
 
@@ -36,7 +36,8 @@ $inputFieldHeight: 80px;
     .word-wrapper {
       max-width: 70%;
       border-bottom: 1px solid transparent;
-  
+
+      font-size: 1.2rem;  
       &:hover {
           cursor: pointer;
           border-bottom: 1px solid whitesmoke;
@@ -63,6 +64,13 @@ $inputFieldHeight: 80px;
       background-image: linear-gradient(135deg, transparent, white 40%);
 
       pointer-events: none;
+      transition: all 1s ease-in-out;
+      -moz-transition: all 1s ease-in-out;
+      -webkit-transition: all 1s;
     }
+  }
+
+  a {
+    text-decoration: none;
   }
 }
