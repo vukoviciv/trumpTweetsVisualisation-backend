@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www",
     "initialize-db": "nodemon ./bin/initialize-database"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
+    "bulma": "^0.6.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "eslint": "^4.10.0",

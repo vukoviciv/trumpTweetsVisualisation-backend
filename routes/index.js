@@ -1,17 +1,17 @@
 const express = require('express');
+
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    let routes = {
-        graph: '/graph',
-        tweets: '/tweets'
-    };
+router.get('/', (req, res) => {
+  const routes = {
+    graph: '/graph',
+    tweets: '/tweets',
+  };
 
-    res.render('index', {
-        title: 'Tuturutututu',
-        routes: routes
-    });
+  res.render('index', {
+    routes,
+  });
 });
 
 module.exports = router;
