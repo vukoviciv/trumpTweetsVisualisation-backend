@@ -55,8 +55,6 @@ const createGraph = (nodes) => {
   createLegend(nodes, color);
 };
 
-// CreateGraph(nodes);
-
 // Window.addEventListener('resize', _.throttle(createGraph(nodes), 1000));
 
 fetch('/graph/fetch_graph')
