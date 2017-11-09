@@ -1,4 +1,5 @@
 const createGraph = (nodes) => {
+  const { d3 } = window;
   const windowDimensions = getWindowInnerDimension();
   const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
   const forceY = d3.forceY(windowDimensions.height / 2).strength(0.09);
@@ -61,4 +62,4 @@ const createGraph = (nodes) => {
 fetch('/graph/fetch_graph')
   .then(res => res.json())
   .then(data => createGraph(data))
-  .catch(err => console.log(err));
+  .catch(err => err);

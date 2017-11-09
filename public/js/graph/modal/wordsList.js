@@ -32,14 +32,6 @@ const updateGraph = (words) => {
     .catch(err => console.log(err));
 };
 
-const submitListHandler = () => {
-  const wordsList = document.getElementById('new-words-list').children;
-  const listElements = new Array(...wordsList);
-  const wordsData = listElements.map(item => item.textContent.toUpperCase());
-
-  updateGraph(wordsData);
-};
-
 const closeModalHandler = () => {
   modalBody.classList.remove('is-active');
   document.getElementById('new-words-list').remove();
@@ -48,13 +40,21 @@ const closeModalHandler = () => {
   backgroundOverlay.style.opacity = 1;
 };
 
+const submitListHandler = () => {
+  const wordsList = document.getElementById('new-words-list').children;
+  const listElements = new Array(...wordsList);
+  const wordsData = listElements.map(item => item.textContent.toUpperCase());
+
+  updateGraph(wordsData);
+  closeModalHandler();
+};
+
 document.querySelector('#input-word').addEventListener('keyup', (e) => {
   if (e.key === 'Enter') {
     submitWordButton.click();
     e.preventDefault();
   }
 });
-
 
 submitWordButton.onclick = submitWordHandler;
 submitList.onclick = submitListHandler;

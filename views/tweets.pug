@@ -1,7 +1,8 @@
 extends layout
 
 block content
-    script(src='/js/main.js')
+    script(src='/js/tweets/tweetItem.js')
+    script(src='/js/tweets/main.js')    
 
     div#app.content
         div.main-container
@@ -16,4 +17,6 @@ block content
                         a(href=`/${baseUrl}/update`) Get new tweets
 
             div.tweets-container
-                include tweetsPage
+                ol#tweet-items-container
+
+                div#load-more LOAD MORE
