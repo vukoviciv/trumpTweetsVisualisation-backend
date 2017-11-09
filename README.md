@@ -6,7 +6,7 @@
 - [x] Endless scroll
 - [ ] Elastic search
 - [x] visualise data (display the most used words). For start they will be predefined. 
-- [ ] Allow user to choose words 
+- [x] Allow user to choose words 
 
 ## How to use this app
 

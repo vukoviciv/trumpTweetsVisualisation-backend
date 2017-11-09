@@ -19,6 +19,8 @@ const submitWordHandler = () => {
 
   backgroundOverlay.style.opacity = 1 - (wordsList.children.length * 0.05);
   modalBodyContent.scrollTop = modalBodyContent.scrollHeight;
+
+  submitList.removeAttribute('disabled');
 };
 
 const updateGraph = (words) => {
@@ -42,6 +44,8 @@ const closeModalHandler = () => {
 
 const submitListHandler = () => {
   const wordsList = document.getElementById('new-words-list').children;
+  if (wordsList.length < 1) return;
+
   const listElements = new Array(...wordsList);
   const wordsData = listElements.map(item => item.textContent.toUpperCase());
 

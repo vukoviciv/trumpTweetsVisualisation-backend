@@ -1,7 +1,7 @@
 const openModalButton = document.getElementById('words-modal');
 const modalBody = document.getElementById('edit-words-list');
 
-const { el, mount } = window.redom;
+const { el, mount, unmount } = window.redom;
 
 openModalButton.onclick = () => {
   modalBody.classList.add('is-active');
