@@ -1,28 +1,4 @@
-const createLegend = (nodes, color) => {
-  const legendContainer = d3.select('#legend-container')
-    .append('g')
-    .attr('class', 'legend-container')
-    .attr('x', 0)
-    .attr('y', 50);
-
-  legendContainer.selectAll('rect')
-    .data(nodes)
-    .enter().append('rect')
-    .style('fill', (d, i) => color(i))
-    .attr('width', 20)
-    .attr('height', 20)
-    .attr('x', 50)
-    .attr('y', (d, i) => 30 * (i + 2));
-
-  legendContainer.selectAll('text')
-    .data(nodes)
-    .enter().append('text')
-    .text(d => d.word)
-    .attr('x', 80)
-    .attr('y', (d, i) => ((30 * (i + 2)) + 15));
-};
-
-const createGraph = (nodes) => {  
+const createGraph = (nodes) => {
   const windowDimensions = getWindowInnerDimension();
   const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
   const forceY = d3.forceY(windowDimensions.height / 2).strength(0.09);
@@ -50,13 +26,15 @@ const createGraph = (nodes) => {
     .enter()
     .append('circle');
 
-  const circlesAttributes = circles
+  // Circles attributes
+  circles
     .attr('r', d => getRadius(d, unitConstant))
     .style('fill', (d, i) => color(i))
     .append('title')
     .text(d => `${d.word} (${d.count})`);
 
-  const texts = textContainer
+  // Text
+  textContainer
     .selectAll('text')
     .data(nodes.filter(node => node.count > 30))
     .enter().append('text')
@@ -64,7 +42,8 @@ const createGraph = (nodes) => {
     .style('font-size', d => getFontSizeInUnits(d, unitConstant))
     .text(d => d.word);
 
-  const force = d3.forceSimulation()
+  // Force
+  d3.forceSimulation()
     .velocityDecay(0.1)
     .force('x', forceX)
     .force('y', forceY)
@@ -75,9 +54,9 @@ const createGraph = (nodes) => {
   createLegend(nodes, color);
 };
 
-//createGraph(nodes);
+// CreateGraph(nodes);
 
-//window.addEventListener('resize', _.throttle(createGraph(nodes), 1000));
+// Window.addEventListener('resize', _.throttle(createGraph(nodes), 1000));
 
 fetch('/graph/fetch_graph')
   .then(res => res.json())

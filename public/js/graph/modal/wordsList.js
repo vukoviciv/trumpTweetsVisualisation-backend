@@ -1,5 +1,7 @@
 const submitWordButton = document.querySelector('.modal #add-word');
 const submitList = document.querySelector('.modal #submit');
+const closeModalButton = document.getElementById('cancel');
+
 const backgroundOverlay = document.querySelector('.modal .background-overlay');
 const modalBodyContent = document.querySelector('.modal .modal-card-body');
 
@@ -7,7 +9,6 @@ const submitWordHandler = () => {
   const inputElement = document.getElementById('input-word');
   const text = inputElement.value;
   const wordsList = document.getElementById('new-words-list');
-  const modalBody = document.getElementById('edit-words-list');
 
   if (!text) return;
 
@@ -20,19 +21,31 @@ const submitWordHandler = () => {
   modalBodyContent.scrollTop = modalBodyContent.scrollHeight;
 };
 
-const sendData = (words) => {
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/graph/words', true);
-  xhr.setRequestHeader('Content-type', 'application/json');
-  xhr.send(JSON.stringify({ words }));
+const updateGraph = (words) => {
+  const url = new URL(`${window.location.href}/fetch_graph`);
+  const params = { words };
+  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => createGraph(data))
+    .catch(err => console.log(err));
 };
 
 const submitListHandler = () => {
   const wordsList = document.getElementById('new-words-list').children;
   const listElements = new Array(...wordsList);
-  const wordsData = listElements.map(item => item.textContent);
+  const wordsData = listElements.map(item => item.textContent.toUpperCase());
 
-  sendData(wordsData);
+  updateGraph(wordsData);
+};
+
+const closeModalHandler = () => {
+  modalBody.classList.remove('is-active');
+  document.getElementById('new-words-list').remove();
+  document.getElementById('input-word').value = '';
+
+  backgroundOverlay.style.opacity = 1;
 };
 
 document.querySelector('#input-word').addEventListener('keyup', (e) => {
@@ -42,6 +55,7 @@ document.querySelector('#input-word').addEventListener('keyup', (e) => {
   }
 });
 
+
 submitWordButton.onclick = submitWordHandler;
 submitList.onclick = submitListHandler;
-
+closeModalButton.onclick = closeModalHandler;
