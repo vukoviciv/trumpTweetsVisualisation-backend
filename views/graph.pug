@@ -1,9 +1,7 @@
 extends layout
 
 block content
-    script(src='https://d3js.org/d3.v4.js')
-    script.
-        var tweets= !{tweets}
+    script(src='https://d3js.org/d3.v4.js')   
 
     div.main-graph-container
         div.left-container
@@ -16,5 +14,6 @@ block content
             svg#graph-container    
         include modal
         
-    script(src='/js/graph/d3graph.js')
+    script(src='/js/graph/d3graph/lib.js')    
+    script(src='/js/graph/d3graph/d3graph.js')
     script(src='/js/graph/main.js')

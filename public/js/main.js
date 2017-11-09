@@ -1,5 +1,5 @@
 "use strict";
-
+// TODO: use redom
 window.addEventListener('scroll', _.throttle(loadMoreAtTheBottom, 500));
 var page = 1;
 
