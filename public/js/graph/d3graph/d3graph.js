@@ -58,7 +58,14 @@ const createGraph = (nodes) => {
   createLegend(nodes, color);
 };
 
-fetch('/graph/fetch_graph')
-  .then(res => res.json())
-  .then(data => createGraph(data))
-  .catch(err => err);
+const fetchGraph = () =>
+  fetch('/graph/fetch_graph')
+    .then(res => res.json())
+    .then(data => createGraph(data))
+    .catch(err => err);
+
+
+module.exports = {
+  fetchGraph,
+  createGraph,
+};

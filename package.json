@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "compile" : "browserify public/js/graph/d3graph/d3graph.js -o public/dist/bundle.js -t [ babelify --presets [ env ] ]",
+    "compile" : "browserify public/js/graph/main.js -o public/dist/bundle.js -t [ babelify --presets [ env ] ]",
     "devstart": "npm run compile && nodemon ./bin/www",
     "initialize-db": "nodemon ./bin/initialize-database"
   },

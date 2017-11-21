@@ -1,6 +1,6 @@
 const models = require('../models');
 
-const Tweet = models.Tweet;
+const { Tweet } = models;
 
 /*  Example of a tweet
     const test = {
