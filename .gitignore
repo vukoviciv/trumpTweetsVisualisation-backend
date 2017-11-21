@@ -23,4 +23,4 @@ data
 twitterAccount.json
 
 # Distribution folder
-.public/dist
+public/dist
