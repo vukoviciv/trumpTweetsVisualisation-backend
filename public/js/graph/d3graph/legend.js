@@ -1,5 +1,5 @@
 const createLegend = (nodes, color) => {
-  const legendContainer = d3.select('#legend-container');
+  const legendContainer = window.d3.select('#legend-container');
   legendContainer.selectAll('*').remove();
 
   legendContainer
@@ -23,4 +23,8 @@ const createLegend = (nodes, color) => {
     .text(d => d.word)
     .attr('x', 80)
     .attr('y', (d, i) => ((30 * (i + 2)) + 15));
+};
+
+module.exports = {
+  createLegend,
 };

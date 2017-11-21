@@ -1,6 +1,9 @@
+import lib from './lib';
+import createLegend from './legend';
+
 const createGraph = (nodes) => {
   const { d3 } = window;
-  const windowDimensions = getWindowInnerDimension();
+  const windowDimensions = lib.getWindowInnerDimension();
   const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
   const forceY = d3.forceY(windowDimensions.height / 2).strength(0.09);
   const unitConstant = windowDimensions.width * 0.0005;
@@ -29,7 +32,7 @@ const createGraph = (nodes) => {
 
   // Circles attributes
   circles
-    .attr('r', d => getRadius(d, unitConstant))
+    .attr('r', d => lib.getRadius(d, unitConstant))
     .style('fill', (d, i) => color(i))
     .append('title')
     .text(d => `${d.word} (${d.count})`);
@@ -40,7 +43,7 @@ const createGraph = (nodes) => {
     .data(nodes.filter(node => node.count > 30))
     .enter().append('text')
     .attr('text-anchor', 'middle')
-    .style('font-size', d => getFontSizeInUnits(d, unitConstant))
+    .style('font-size', d => lib.getFontSizeInUnits(d, unitConstant))
     .text(d => d.word);
 
   // Force
@@ -48,14 +51,12 @@ const createGraph = (nodes) => {
     .velocityDecay(0.1)
     .force('x', forceX)
     .force('y', forceY)
-    .force('collide', d3.forceCollide().radius(d => getRadius(d, unitConstant)).iterations(1))
+    .force('collide', d3.forceCollide().radius(d => lib.getRadius(d, unitConstant)).iterations(1))
     .nodes(nodes)
-    .on('tick', () => ticked(circlesContainer, textContainer, unitConstant));
+    .on('tick', () => lib.ticked(circlesContainer, textContainer, unitConstant));
 
   createLegend(nodes, color);
 };
-
-// Window.addEventListener('resize', _.throttle(createGraph(nodes), 1000));
 
 fetch('/graph/fetch_graph')
   .then(res => res.json())

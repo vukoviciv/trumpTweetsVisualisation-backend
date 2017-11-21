@@ -9,7 +9,6 @@ const { fetchTweets, fetchLastRawTweet, getLargeProfileImageFromSmall } = requir
 
 router.get('/', (req, res) => {
   const limit = 50;
-
   let page = 1;
   let profile;
   userRepository.getProfileAndBackgroundUrl()

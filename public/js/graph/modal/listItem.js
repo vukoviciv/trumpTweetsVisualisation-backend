@@ -10,3 +10,5 @@ class ListItem {
     };
   }
 }
+
+module.exports = ListItem;

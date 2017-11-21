@@ -1,3 +1,5 @@
+import ListItem from './listItem';
+
 const submitWordButton = document.querySelector('.modal #add-word');
 const submitList = document.querySelector('.modal #submit');
 const closeModalButton = document.getElementById('cancel');

@@ -16,3 +16,10 @@ const ticked = (circlesContainer, textContainer, unitConstant) => {
     .attr('x', d => d.x)
     .attr('y', d => d.y + (getFontSizeInUnits(d, unitConstant) / 3));
 };
+
+module.exports = {
+  getWindowInnerDimension,
+  getRadius,
+  ticked,
+  getFontSizeInUnits,
+};
