@@ -12,10 +12,8 @@ package-lock.json
 # Optional npm cache directory
 .npm
 
-# IntelliJ project files
+# Editors
 .idea
-
-# VS Code project files
 .vscode
 
 # Data
@@ -23,3 +21,6 @@ data
 
 # Twitter account
 twitterAccount.json
+
+# Distribution folder
+.public/dist

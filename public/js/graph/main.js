@@ -11,6 +11,7 @@ const modalBody = document.getElementById('edit-words-list');
 
 graph.fetchGraph();
 
+/* Modal handlers */
 submitWordButton.onclick = () => modalHandlers.submitWord(submitList);
 closeModalButton.onclick = () => modalHandlers.close(modalBody);
 inputWord.onkeyup = event => modalHandlers.onKeyUp(event, submitWordButton);
