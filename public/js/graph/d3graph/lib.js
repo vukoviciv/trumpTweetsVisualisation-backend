@@ -17,9 +17,15 @@ const ticked = (circlesContainer, textContainer, unitConstant) => {
     .attr('y', d => d.y + (getFontSizeInUnits(d, unitConstant) / 3));
 };
 
+const customDataExists = () => window.sessionStorage.getItem('graphData');
+
+const getDefaultData = () => JSON.parse(window.sessionStorage.getItem('defaultData'));
+
 module.exports = {
   getWindowInnerDimension,
   getRadius,
   ticked,
   getFontSizeInUnits,
+  customDataExists,
+  getDefaultData,
 };

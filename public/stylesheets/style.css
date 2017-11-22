@@ -17,6 +17,9 @@ body {
     body {
       font-size: 16px; } }
 
+.hidden {
+  display: none; }
+
 .question-container {
   text-transform: capitalize; }
   .question-container .row {
@@ -1992,13 +1995,18 @@ body {
 .main-graph-container {
   display: flex;
   align-items: stretch; }
-  .main-graph-container .left-container {
+  .main-graph-container .left-container,
+  .main-graph-container .right-container {
     position: relative; }
   .main-graph-container .button-container {
     position: absolute;
     bottom: 1em;
     left: 1em;
     width: 100%; }
+    .main-graph-container .button-container.right {
+      right: 1em;
+      left: unset;
+      width: 20rem; }
     .main-graph-container .button-container .twitter-button {
       position: relative;
       padding: .4rem 1rem;
