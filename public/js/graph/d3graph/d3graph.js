@@ -1,12 +1,6 @@
 import lib from './lib';
 import createLegend from './legend';
 
-const showOrHideResetDefaultButton = () => {
-  const resetButton = document.getElementById('reset-to-default');
-  if (lib.customDataExists()) resetButton.classList.remove('hidden');
-  else resetButton.classList.add('hidden');
-};
-
 const createGraph = (nodes = JSON.parse(window.sessionStorage.getItem('graphData'))) => {
   const { d3 } = window;
   const windowDimensions = lib.getWindowInnerDimension();
@@ -62,7 +56,7 @@ const createGraph = (nodes = JSON.parse(window.sessionStorage.getItem('graphData
     .on('tick', () => lib.ticked(circlesContainer, textContainer, unitConstant));
 
   createLegend(nodes, color);
-  showOrHideResetDefaultButton();
+  lib.showOrHideResetDefaultButton();
 };
 
 const fetchGraph = () => {

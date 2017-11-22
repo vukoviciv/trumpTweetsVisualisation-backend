@@ -19,9 +19,6 @@ const resetToDefaultDataHandler = () => {
 
 graph.fetchGraph();
 
-resetToDefaultButton.onclick = resetToDefaultDataHandler;
-
-/* Modal handlers */
 submitWordButton.onclick = () => modalHandlers.submitWord(submitList);
 closeModalButton.onclick = () => modalHandlers.close(modalBody);
 inputWord.onkeyup = event => modalHandlers.onKeyUp(event, submitWordButton);
@@ -30,3 +27,4 @@ submitList.onclick = () => {
   modalHandlers.close(modalBody);
 };
 openModalButton.onclick = modalHandlers.open;
+resetToDefaultButton.onclick = resetToDefaultDataHandler;
