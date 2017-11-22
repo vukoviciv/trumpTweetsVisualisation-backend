@@ -10,7 +10,10 @@ const updateGraph = (words) => {
 
   fetch(url)
     .then(res => res.json())
-    .then(data => graph.createGraph(data))
+    .then((data) => {
+      window.sessionStorage.setItem('graphData', JSON.stringify(data));
+      graph.createGraph(data);
+    })
     .catch(err => console.log(err));
 };
 

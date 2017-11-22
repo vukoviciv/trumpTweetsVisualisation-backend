@@ -1,4 +1,4 @@
-class ListItem {
+export default class ListItem {
   constructor(word) {
     const { el } = window.redom;
     this.elem = el(
@@ -11,5 +11,3 @@ class ListItem {
     };
   }
 }
-
-module.exports = ListItem;

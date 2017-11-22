@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "compile" : "browserify public/js/graph/main.js -o public/dist/bundle.js -t [ babelify --presets [ env ] ]",
+    "compile-graph-page": "browserify public/js/graph/main.js -o public/dist/graphBundle.js -t [ babelify --presets [ env ] ]",
+    "compile-tweets-page": "browserify public/js/tweets/main.js -o public/dist/tweetsBundle.js -t [ babelify --presets [ env ] ]",
+    "compile" : "npm run compile-graph-page && npm run compile-tweets-page",
     "devstart": "npm run compile && nodemon ./bin/www",
     "initialize-db": "nodemon ./bin/initialize-database"
   },

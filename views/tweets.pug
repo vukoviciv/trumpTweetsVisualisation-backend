@@ -1,9 +1,6 @@
 extends layout
 
 block content
-    script(src='/js/tweets/tweetItem.js')
-    script(src='/js/tweets/main.js')    
-
     div#app.content
         div.main-container
             div.header
@@ -20,3 +17,5 @@ block content
                 ol#tweet-items-container
 
                 div#load-more LOAD MORE
+
+    script(src='/dist/tweetsBundle.js')

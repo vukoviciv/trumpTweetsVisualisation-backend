@@ -1,7 +1,7 @@
 import lib from './lib';
 import createLegend from './legend';
 
-const createGraph = (nodes) => {
+const createGraph = (nodes = JSON.parse(window.sessionStorage.getItem('graphData'))) => {
   const { d3 } = window;
   const windowDimensions = lib.getWindowInnerDimension();
   const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
@@ -58,12 +58,22 @@ const createGraph = (nodes) => {
   createLegend(nodes, color);
 };
 
-const fetchGraph = () =>
+const fetchGraph = () => {
+  const savedGraphData = JSON.parse(window.sessionStorage.getItem('graphData'));
+  if (savedGraphData) {
+    createGraph(savedGraphData);
+    return;
+  }
+
   fetch('/graph/fetch_graph')
     .then(res => res.json())
-    .then(data => createGraph(data))
+    .then((data) => {
+      createGraph(data);
+      window.sessionStorage.setItem('graphData', JSON.stringify(data));
+      window.sessionStorage.setItem('defaultData', JSON.stringify(data));
+    })
     .catch(err => err);
-
+};
 
 module.exports = {
   fetchGraph,
