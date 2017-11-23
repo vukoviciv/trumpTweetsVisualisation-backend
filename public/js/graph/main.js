@@ -28,3 +28,5 @@ submitList.onclick = () => {
 };
 openModalButton.onclick = modalHandlers.open;
 resetToDefaultButton.onclick = resetToDefaultDataHandler;
+
+window.addEventListener('resize', window._.throttle(graph.fetchGraph, 1000, { leading: false }));

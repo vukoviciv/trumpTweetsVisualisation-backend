@@ -60,6 +60,13 @@ const createGraph = (nodes = JSON.parse(window.sessionStorage.getItem('graphData
 };
 
 const fetchGraph = () => {
+  console.log('fetching');
+  const defaultData = JSON.parse(window.sessionStorage.getItem('defaultData'));
+  if (defaultData) {
+    createGraph(defaultData);
+    return;
+  }
+
   const savedGraphData = JSON.parse(window.sessionStorage.getItem('graphData'));
   if (savedGraphData) {
     createGraph(savedGraphData);
