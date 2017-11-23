@@ -1,45 +1,45 @@
 #!/usr/bin/env node
-/**
+/*
  * First create database using command
  *          create database <database_name> character set utf8mb4 COLLATE utf8mb4_unicode_ci;
  * After that, run this script with
  *          npm run initialize-db
  *
- * Script will create table and store all current tweets (up to 10000; see config.json). After that, just use functions
- * for updating tweets.
- **/
+ * Script will create table and store all current tweets (up to 10000; see config.json).
+ * After that, just use functions for updating tweets.
+ */
 
 const models = require('../models');
 
 const options = require('../lib/options');
 const fetchTweets = require('../lib/helpers');
 
-const Tweet = models.Tweet;
+const { Tweet } = models.Tweet;
 
-models.sequelize.sync()
-    .then(() => {
-        console.log('DB synced');
-        initializeDatabase();
-    })
-    .catch(err => console.log(err));
+const bulkCreate = tweets =>
+  // raw: true
+  Tweet.bulkCreate(tweets).then(() => {
+    console.log('Number of inserted tweets: ', tweets.length);
+    return Tweet.findAll();
+  });
 
-function bulkCreate(tweets) { //raw: true
-    return Tweet.bulkCreate(tweets)
-        .then(() => {
-            console.log('Number of inserted tweets: ', tweets.length);
-            return Tweet.findAll();
-        })
-}
+const initializeDatabase = () => {
+  console.log('Initializing database.');
 
-function initializeDatabase() {
-    console.log('Initializing database.');
-
-    fetchTweets(options)
-        .then(data => {
-            const reversedData = data.reverse(); // reverse data so we have newest tweet last wrote in db
-            bulkCreate(reversedData)
-                .then(data => console.log('Bulk save finished.'))
-                .catch(err => res.render('error', {error, err}))
-        })
+  fetchTweets(options)
+    .then((data) => {
+      const reversedData = data.reverse(); // reverse data so we have newest tweet last wrote in db
+      bulkCreate(reversedData)
+        .then(console.log('Bulk save finished.'))
         .catch(err => console.log('error: ', err));
-}
+    })
+    .catch(err => console.log('error: ', err));
+};
+
+models.sequelize
+  .sync()
+  .then(() => {
+    console.log('DB synced');
+    initializeDatabase();
+  })
+  .catch(err => console.log(err));

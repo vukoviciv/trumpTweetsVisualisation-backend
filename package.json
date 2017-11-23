@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www",
+    "compile-graph-page": "browserify public/js/graph/main.js -o public/dist/graphBundle.js -t [ babelify --presets [ env ] ]",
+    "compile-tweets-page": "browserify public/js/tweets/main.js -o public/dist/tweetsBundle.js -t [ babelify --presets [ env ] ]",
+    "compile" : "npm run compile-graph-page && npm run compile-tweets-page",
+    "devstart": "npm run compile && nodemon ./bin/www",
     "initialize-db": "nodemon ./bin/initialize-database"
   },
   "dependencies": {
@@ -25,6 +28,10 @@
     "twit": "^2.2.9"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "browserify": "^14.5.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "locus": "^2.0.1",

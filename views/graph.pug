@@ -1,20 +1,20 @@
 extends layout
 
 block content
-    script(src='https://d3js.org/d3.v4.js')   
+    script(src='https://d3js.org/d3.v4.js')
 
     div.main-graph-container
         div.left-container
             svg#legend-container
             div.button-container
                 div.twitter-button#words-modal
-                    span Let me build my own words list!          
+                    span Let me build my own words list!
 
         div.right-container
-            svg#graph-container    
+            svg#graph-container
+            div.button-container.right
+                div.twitter-button#reset-to-default
+                    span Reset to default words
         include modal
-        
-    script(src='/js/graph/d3graph/lib.js')
-    script(src='/js/graph/d3graph/legend.js')       
-    script(src='/js/graph/d3graph/d3graph.js')
-    script(src='/js/graph/main.js')
+
+    script(src='/dist/graphBundle.js')

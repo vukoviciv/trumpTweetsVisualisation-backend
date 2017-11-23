@@ -11,7 +11,8 @@ $textColor: #fff;
   display: flex;
   align-items: stretch;
 
-  .left-container {
+  .left-container,
+  .right-container {
     position: relative;
   }
 
@@ -20,6 +21,12 @@ $textColor: #fff;
     bottom: 1em;
     left: 1em;
     width: 100%;
+
+    &.right {
+      right: 1em;
+      left: unset;
+      width: 20rem;
+    }
 
     .twitter-button {
       position: relative;
@@ -34,7 +41,7 @@ $textColor: #fff;
       background-color: #48AAE6;
       border: 1px solid #1da1f2;
       color: #f6f6f6;
-     
+
       &:hover {
         background-color: #1B95E0;
         border-color: #1B95E0;

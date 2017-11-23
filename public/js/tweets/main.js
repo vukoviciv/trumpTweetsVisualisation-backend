@@ -1,5 +1,6 @@
+import TweetListItem from './tweetItem';
+
 let page = 1;
-const { el, mount } = window.redom;
 
 const modifyDateFormat = (tweet) => {
   let parsedTime = new Date(Date.parse(tweet.created_at));
@@ -18,7 +19,7 @@ const fetchNewPage = () => {
     .then(data => data.tweets.map(tweet => getTweetHTMLcomponent(tweet)))
     .then((tweets) => {
       const listElement = document.getElementById('tweet-items-container');
-      tweets.forEach(liEl => mount(listElement, liEl));
+      tweets.forEach(liEl => listElement.append(liEl.elem));
       page += 1;
     });
 };

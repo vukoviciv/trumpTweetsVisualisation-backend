@@ -1,12 +1,13 @@
-class ListItem {
+export default class ListItem {
   constructor(word) {
-    this.el = el(
+    const { el } = window.redom;
+    this.elem = el(
       'li.word-wrapper',
       this.word = el('span', word),
       this.removeIcon = el('i.fa.fa-times', { 'aria-hidden': true }),
     );
     this.removeIcon.onclick = () => {
-      this.el.remove();
+      this.elem.remove();
     };
   }
 }
