@@ -12,7 +12,7 @@ const updateGraph = (words) => {
     .then(res => res.json())
     .then((data) => {
       window.sessionStorage.setItem('graphData', JSON.stringify(data));
-      graph.createGraph(data);
+      graph.create(data);
     })
     .catch(err => console.log(err));
 };

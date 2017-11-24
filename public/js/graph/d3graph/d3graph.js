@@ -60,6 +60,12 @@ const createGraph = (nodes = JSON.parse(window.sessionStorage.getItem('graphData
 };
 
 const fetchGraph = () => {
+  const defaultData = JSON.parse(window.sessionStorage.getItem('defaultData'));
+  if (defaultData) {
+    createGraph(defaultData);
+    return;
+  }
+
   const savedGraphData = JSON.parse(window.sessionStorage.getItem('graphData'));
   if (savedGraphData) {
     createGraph(savedGraphData);
@@ -76,6 +82,6 @@ const fetchGraph = () => {
 };
 
 module.exports = {
-  fetchGraph,
-  createGraph,
+  fetch: fetchGraph,
+  create: createGraph,
 };

@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "compile-graph-page": "browserify public/js/graph/main.js -o public/dist/graphBundle.js -t [ babelify --presets [ env ] ]",
     "compile-tweets-page": "browserify public/js/tweets/main.js -o public/dist/tweetsBundle.js -t [ babelify --presets [ env ] ]",
-    "compile" : "npm run compile-graph-page && npm run compile-tweets-page",
+    "compile": "npm run compile-graph-page && npm run compile-tweets-page",
     "devstart": "npm run compile && nodemon ./bin/www",
     "initialize-db": "nodemon ./bin/initialize-database"
   },
@@ -17,6 +17,7 @@
     "debug": "~2.6.3",
     "eslint": "^4.10.0",
     "express": "~4.15.2",
+    "lodash": "^4.17.4",
     "morgan": "~1.8.1",
     "mysql": "^2.14.1",
     "mysql2": "^1.4.2",
