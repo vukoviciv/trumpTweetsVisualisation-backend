@@ -38,16 +38,12 @@ router.get('/update', (req, res) => {
 /* API endpoints */
 
 router.get('/page/:page', (req, res) => {
-  let { page } = req.params;
+  const { page } = req.params;
   const limit = 50;
 
   tweetRepository.fetchPage(limit, page)
     .then((data) => {
-      page += 1;
-      res.json({
-        tweets: data.rows,
-        nextPageUrl: `${page}`,
-      });
+      res.json({ tweets: data.rows });
     });
 });
 
