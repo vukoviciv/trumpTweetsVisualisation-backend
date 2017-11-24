@@ -14,7 +14,7 @@ const modifyDateFormat = (tweet) => {
 const getTweetHTMLcomponent = tweet => new TweetListItem(modifyDateFormat(tweet));
 
 const fetchNewPage = () => {
-  fetch(`/tweets/${page}`)
+  fetch(`/tweets/page/${page}`)
     .then(res => res.json())
     .then(data => data.tweets.map(tweet => getTweetHTMLcomponent(tweet)))
     .then((tweets) => {

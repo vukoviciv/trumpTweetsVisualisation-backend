@@ -27,7 +27,7 @@ const saveBulk = tweets =>
     return tweets.length;
   });
 
-const fetchPage = (pageNumber, limit) => {
+const fetchPage = (limit, pageNumber) => {
   const offset = pageNumber ? limit * (pageNumber - 1) : 0;
 
   return Tweet.findAndCountAll({
