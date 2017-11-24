@@ -82,6 +82,6 @@ const fetchGraph = () => {
 };
 
 module.exports = {
-  fetchGraph,
-  createGraph,
+  fetch: fetchGraph,
+  create: createGraph,
 };

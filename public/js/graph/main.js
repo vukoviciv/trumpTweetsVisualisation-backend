@@ -1,6 +1,6 @@
 import graph from './d3graph/d3graph';
-import lib from './d3graph/lib';
 import modalHandlers from './modal/modalHandlers';
+import { resetToDefaultDataHandler } from './lib';
 
 const submitWordButton = document.querySelector('.modal #add-word');
 const closeModalButton = document.getElementById('cancel');
@@ -10,14 +10,7 @@ const openModalButton = document.getElementById('words-modal');
 const resetToDefaultButton = document.getElementById('reset-to-default');
 const modalBody = document.getElementById('edit-words-list');
 
-const resetToDefaultDataHandler = () => {
-  const defaultData = lib.getDefaultData();
-  window.sessionStorage.removeItem('graphData');
-
-  graph.createGraph(defaultData);
-};
-
-graph.fetchGraph();
+graph.fetch();
 
 submitWordButton.onclick = () => modalHandlers.submitWord(submitList);
 closeModalButton.onclick = () => modalHandlers.close(modalBody);
@@ -29,4 +22,4 @@ submitList.onclick = () => {
 openModalButton.onclick = modalHandlers.open;
 resetToDefaultButton.onclick = resetToDefaultDataHandler;
 
-window.addEventListener('resize', window._.throttle(graph.fetchGraph, 1000, { leading: false }));
+window.addEventListener('resize', window._.throttle(graph.fetch, 1000, { leading: false }));
