@@ -5,7 +5,7 @@ const userRepository = require('../repositories/userRepository');
 
 const router = express.Router();
 
-const { fetchTweets, fetchLastRawTweet, getLargeProfileImageFromSmall } = require('../lib/helpers');
+const { fetchTweets, updateUserProfile, getLargeProfileImageFromSmall } = require('../lib/helpers');
 
 router.get('/', (req, res) => {
   const limit = 50;
@@ -32,18 +32,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/update', (req, res) => {
-  // const redirectRoute = '/tweets';
+  // TODO: clean up this!
   tweetRepository.getNewestTweet()
     .then((lastTweet) => {
       options.queryParams.since_id = lastTweet.id_str;
 
-      // TODO: extract
-      fetchLastRawTweet(lastTweet.id_str, options.tweetsUrl)
-        .then(({ data }) => {
-          if (data[0]) {
-            userRepository.findAndUpdate(data[0].user);
-          }
-        });
+      updateUserProfile(lastTweet.id_str, options.tweetsUrl);
 
       fetchTweets(options)
         .then((data) => {
