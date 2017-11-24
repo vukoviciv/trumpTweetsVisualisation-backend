@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/update', (req, res) => {
-  const redirectRoute = '/tweets';
+  // const redirectRoute = '/tweets';
   tweetRepository.getNewestTweet()
     .then((lastTweet) => {
       options.queryParams.since_id = lastTweet.id_str;
@@ -53,7 +53,7 @@ router.get('/update', (req, res) => {
             .then(numberOfSavedTweets => console.log('Number of saved tweets: ', numberOfSavedTweets))
             .catch(err => res.render('error', { error: err }));
         })
-        .then(res.redirect(redirectRoute))
+        .then(res.render('/'))
         .catch(err => res.render('error', { error: err }));
     })
     .catch(err => console.log(err));
