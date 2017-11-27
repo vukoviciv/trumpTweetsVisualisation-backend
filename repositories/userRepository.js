@@ -1,34 +1,31 @@
 const models = require('../models');
-const User = models.User;
 
-const pick = require('lodash/pick');
+const { User } = models;
 
-function createUserProfile(profileData) {
-    return User.findOrCreate({
-            where: {screen_name: profileData.screen_name},
-            defaults: profileData
-        })
-        .spread((profileData, created) => {
-            console.log("created: ", created);
-        })
-}
+const createUserProfile = profileData =>
+  User.findOrCreate({
+    where: { screen_name: profileData.screen_name },
+    defaults: profileData,
+  }).spread((data, created) => {
+    console.log('created: ', created);
+  });
 
-function findAndUpdate(profileData) {
-    return User.update(profileData,
-            { where: {screen_name: profileData.screen_name}
-        })
-        .then(result => console.log(result))
-        .catch(err => console.log(err))
-}
+const findAndUpdate = profileData =>
+  User.update(profileData, {
+    where: { screen_name: profileData.screen_name },
+  })
+    .then((numOfUpdatedRows, updatedRows) => {
+      console.log('Updated rows: ', updatedRows);
+      return numOfUpdatedRows;
+    })
+    .catch(err => console.log(err));
 
-function getProfileAndBackgroundUrl() {
-    return User.findOne({
-        order: [['id', 'DESC']]
-    }).then(userProfile => userProfile)
-}
+const getProfileAndBackgroundUrl = () =>
+  User.findOne({ order: [['id', 'DESC']] })
+    .then(userProfile => userProfile);
 
 module.exports = {
-    createUserProfile,
-    findAndUpdate,
-    getProfileAndBackgroundUrl
+  createUserProfile,
+  findAndUpdate,
+  getProfileAndBackgroundUrl,
 };
