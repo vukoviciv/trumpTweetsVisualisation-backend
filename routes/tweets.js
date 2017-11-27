@@ -5,7 +5,7 @@ const userRepository = require('../repositories/userRepository');
 
 const router = express.Router();
 
-const { fetchTweets, updateUserProfile, getLargeProfileImageFromSmall } = require('../lib/helpers');
+const { fetchTweets, updateOrCreateUserProfile, getLargeProfileImageFromSmall } = require('../lib/helpers');
 
 router.get('/', (req, res) => {
   userRepository.getProfileAndBackgroundUrl()
@@ -24,7 +24,7 @@ router.get('/update', (req, res) => {
   tweetRepository.getNewestTweet()
     .then((lastTweet) => {
       options.queryParams.since_id = lastTweet.id_str;
-      updateUserProfile(lastTweet.id_str, options.tweetsUrl);
+      updateOrCreateUserProfile(lastTweet.id_str, options.tweetsUrl);
     })
     .then(() => fetchTweets(options))
     .then(data => tweetRepository.saveBulk(data.reverse()))
