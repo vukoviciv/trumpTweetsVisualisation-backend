@@ -31,7 +31,7 @@ const fetchPage = (limit, pageNumber) => {
   const offset = pageNumber ? limit * (pageNumber - 1) : 0;
 
   return Tweet.findAndCountAll({
-    attributes: ['id', 'id_str', 'full_text', 'created_at'],
+    attributes: ['id', 'id_str', 'full_text', 'created_at', 'favorite_count'],
     order: [['id', 'DESC']],
     limit,
     offset,

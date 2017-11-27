@@ -1,8 +1,27 @@
+$max-width: 64rem;
+
+$background-color: #ffffff;
+$light-grey: #657786;
+
+@mixin inset-top-shadow() {
+  -webkit-box-shadow: inset 0px 3px 5px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: inset 0px 3px 5px 0px rgba(0,0,0,0.15);
+  box-shadow: inset 0px 3px 5px 0px rgba(0,0,0,0.15);
+}
+
+@mixin transition-ease-out () {
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -ms-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+
 #app {
-  background-color: #f6f6f6;
+  background-color: $background-color;
 
   .main-container {
-    max-width: 64rem;
+    max-width: $max-width;
     width: 100%;
     margin: 0 auto;
   }
@@ -12,21 +31,24 @@
 
     .header-background img {
       width: 100%;
-      border-radius: 2rem;
+      border-radius: 0 0 2rem 2rem;
     }
 
     .header-profile-picture {
       position: absolute;
       left: -0.5rem;;
-      bottom: -3.5rem;
+      bottom: -4rem;
+      @include transition-ease-out();
 
       .profile-picture-container {
         position: relative;
         height: 12.5rem;
         width: 12.5rem;
-        background: #f6f6f6;
-        border: .4rem solid #f6f6f6;
+        background: $background-color;
+        border: .4rem solid $background-color;
         border-radius: 50%;
+
+        @include transition-ease-out();
 
         img {
           width: 100%;
@@ -40,7 +62,9 @@
       position: absolute;
       right: 0;
       left: 12.5rem;
-      bottom: -3rem;
+      bottom: -3.3rem;
+
+      @include transition-ease-out();
 
       .twitter-button {
         position: relative;
@@ -70,7 +94,7 @@
         }
 
         &:active {
-          box-shadow: 0 0 0 2px #f6f6f6, 0 0 0 4px #48AAE6;
+          box-shadow: 0 0 0 2px $background-color, 0 0 0 4px #48AAE6;
         }
 
       }
@@ -80,8 +104,18 @@
   .tweets-container {
     margin-top: 4rem;
 
+    @include inset-top-shadow;
+
+    #tweet-items-container {
+      max-width: $max-width;
+      margin: 0 auto;
+      padding: 1.6rem;
+      list-style: none;
+    }
+
     li.tweet {
       padding: .8rem;
+      line-height: 1.5;
 
       &:hover {
         background-color: #E5EBEF;
@@ -90,12 +124,41 @@
       .time {
         margin-left: 1rem;
         font-size: .8rem;
-        color: rgb(101, 119, 134);
+        color: $light-grey;
+      }
+
+      .favorite-count {
+        float: right;
+        color: $light-grey;
+      }
+
+      .favorite-count .fa {
+        color: red;
       }
     }
 
     #load-more {
       display: none;
     }
+  }
+}
+
+body.fixed-picture {
+  #app .header .header-profile-picture {
+    position: fixed;
+    right: 0;
+    left: unset;
+    bottom: 0;
+    @include transition-ease-out();
+    transform: scale(0.5) translateY(30%);
+
+    .profile-picture-container {
+      @include transition-ease-out();
+    }
+  }
+
+  #app .button-container {
+    left: 0;
+    @include transition-ease-out();
   }
 }

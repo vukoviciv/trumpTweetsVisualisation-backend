@@ -50,7 +50,7 @@ body {
         color: black; }
 
 #app {
-  background-color: #f6f6f6; }
+  background-color: #ffffff; }
   #app .main-container {
     max-width: 64rem;
     width: 100%;
@@ -59,18 +59,28 @@ body {
     position: relative; }
     #app .header .header-background img {
       width: 100%;
-      border-radius: 2rem; }
+      border-radius: 0 0 2rem 2rem; }
     #app .header .header-profile-picture {
       position: absolute;
       left: -0.5rem;
-      bottom: -3.5rem; }
+      bottom: -4rem;
+      -webkit-transition: all 1s ease-out;
+      -moz-transition: all 1s ease-out;
+      -ms-transition: all 1s ease-out;
+      -o-transition: all 1s ease-out;
+      transition: all 1s ease-out; }
       #app .header .header-profile-picture .profile-picture-container {
         position: relative;
         height: 12.5rem;
         width: 12.5rem;
-        background: #f6f6f6;
-        border: .4rem solid #f6f6f6;
-        border-radius: 50%; }
+        background: #ffffff;
+        border: 0.4rem solid #ffffff;
+        border-radius: 50%;
+        -webkit-transition: all 1s ease-out;
+        -moz-transition: all 1s ease-out;
+        -ms-transition: all 1s ease-out;
+        -o-transition: all 1s ease-out;
+        transition: all 1s ease-out; }
         #app .header .header-profile-picture .profile-picture-container img {
           width: 100%;
           height: 100%;
@@ -79,7 +89,12 @@ body {
       position: absolute;
       right: 0;
       left: 12.5rem;
-      bottom: -3rem; }
+      bottom: -3.3rem;
+      -webkit-transition: all 1s ease-out;
+      -moz-transition: all 1s ease-out;
+      -ms-transition: all 1s ease-out;
+      -o-transition: all 1s ease-out;
+      transition: all 1s ease-out; }
       #app .header .button-container .twitter-button {
         position: relative;
         padding: .4rem 1rem;
@@ -102,19 +117,59 @@ body {
           background-color: #1B95E0;
           border-color: #1B95E0; }
         #app .header .button-container .twitter-button:active {
-          box-shadow: 0 0 0 2px #f6f6f6, 0 0 0 4px #48AAE6; }
+          box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #48AAE6; }
   #app .tweets-container {
-    margin-top: 4rem; }
+    margin-top: 4rem;
+    -webkit-box-shadow: inset 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: inset 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0px 3px 5px 0px rgba(0, 0, 0, 0.15); }
+    #app .tweets-container #tweet-items-container {
+      max-width: 64rem;
+      margin: 0 auto;
+      padding: 1.6rem;
+      list-style: none; }
     #app .tweets-container li.tweet {
-      padding: .8rem; }
+      padding: .8rem;
+      line-height: 1.5; }
       #app .tweets-container li.tweet:hover {
         background-color: #E5EBEF; }
       #app .tweets-container li.tweet .time {
         margin-left: 1rem;
         font-size: .8rem;
         color: #657786; }
+      #app .tweets-container li.tweet .favorite-count {
+        float: right;
+        color: #657786; }
+      #app .tweets-container li.tweet .favorite-count .fa {
+        color: red; }
     #app .tweets-container #load-more {
       display: none; }
+
+body.fixed-picture #app .header .header-profile-picture {
+  position: fixed;
+  right: 0;
+  left: unset;
+  bottom: 0;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -ms-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  transform: scale(0.5) translateY(30%); }
+  body.fixed-picture #app .header .header-profile-picture .profile-picture-container {
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -ms-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    transition: all 1s ease-out; }
+
+body.fixed-picture #app .button-container {
+  left: 0;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -ms-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out; }
 
 .modal {
   bottom: 0;

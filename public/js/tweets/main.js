@@ -1,5 +1,7 @@
 import TweetListItem from './tweetItem';
 
+const bodyContainer = document.body;
+const profilePictureContainerHeight = document.getElementsByClassName('header-profile-picture')[0].offsetHeight;
 let page = 1;
 
 const modifyDateFormat = (tweet) => {
@@ -30,5 +32,12 @@ const loadMoreAtTheBottom = () => {
   }
 };
 
+const attachFixedClassToBody = () => {
+  if (window.scrollY >= profilePictureContainerHeight * 2) {
+    bodyContainer.classList.add('fixed-picture');
+  } else bodyContainer.classList.remove('fixed-picture');
+};
+
 fetchNewPage();
 window.addEventListener('scroll', window._.throttle(loadMoreAtTheBottom, 500));
+window.addEventListener('scroll', window._.throttle(attachFixedClassToBody, 500));
