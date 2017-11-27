@@ -1,7 +1,8 @@
 import TweetListItem from './tweetItem';
 
 const bodyContainer = document.body;
-const profilePictureContainerHeight = document.getElementsByClassName('header-profile-picture')[0].offsetHeight;
+const profilePictureContainer = document.getElementsByClassName('header-profile-picture')[0];
+const profilePictureContainerHeight = profilePictureContainer.offsetHeight;
 let page = 1;
 
 const modifyDateFormat = (tweet) => {
@@ -33,11 +34,23 @@ const loadMoreAtTheBottom = () => {
 };
 
 const attachFixedClassToBody = () => {
-  if (window.scrollY >= profilePictureContainerHeight * 2) {
-    bodyContainer.classList.add('fixed-picture');
-  } else bodyContainer.classList.remove('fixed-picture');
+  if (window.scrollY >= profilePictureContainerHeight * 2) bodyContainer.classList.add('fixed-picture');
+  else bodyContainer.classList.remove('fixed-picture');
+};
+
+const mouseOverTrumpHandler = (event) => {
+  if (!bodyContainer.classList.contains('fixed-picture')) return;
+  profilePictureContainer.style.transform = `translateY(-${event.screenY - profilePictureContainer.offsetHeight}px) scale(0.5)`;
+};
+
+const mouseOutTrumpHandler = () => {
+  if (!bodyContainer.classList.contains('fixed-picture')) return;
+  profilePictureContainer.style.transform = 'scale(0.5) translateY(30%)';
 };
 
 fetchNewPage();
+profilePictureContainer.addEventListener('mouseover', event => mouseOverTrumpHandler(event));
+profilePictureContainer.addEventListener('mouseout', window._.throttle(mouseOutTrumpHandler, 5000));
+
 window.addEventListener('scroll', window._.throttle(loadMoreAtTheBottom, 500));
 window.addEventListener('scroll', window._.throttle(attachFixedClassToBody, 500));

@@ -10,11 +10,11 @@ $light-grey: #657786;
 }
 
 @mixin transition-ease-out () {
-  -webkit-transition: all 1s ease-out;
-  -moz-transition: all 1s ease-out;
-  -ms-transition: all 1s ease-out;
-  -o-transition: all 1s ease-out;
-  transition: all 1s ease-out;
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -ms-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  transition: all .2s ease-out;
 }
 
 #app {
@@ -118,11 +118,19 @@ $light-grey: #657786;
       line-height: 1.5;
 
       &:hover {
-        background-color: #E5EBEF;
+        background-color: #f6f6f6;
+        @include transition-ease-out();
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+
+      .time-count-wrapper {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
       }
 
       .time {
-        margin-left: 1rem;
         font-size: .8rem;
         color: $light-grey;
       }
