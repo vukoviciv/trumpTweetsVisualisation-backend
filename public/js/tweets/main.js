@@ -33,9 +33,12 @@ const loadMoreAtTheBottom = () => {
   }
 };
 
-const attachFixedClassToBody = () => {
+const attachOrRemoveFixedClassToBody = () => {
   if (window.scrollY >= profilePictureContainerHeight * 2) bodyContainer.classList.add('fixed-picture');
-  else bodyContainer.classList.remove('fixed-picture');
+  else {
+    bodyContainer.classList.remove('fixed-picture');
+    profilePictureContainer.style.transform = '';
+  }
 };
 
 const mouseOverTrumpHandler = (event) => {
@@ -53,4 +56,4 @@ profilePictureContainer.addEventListener('mouseover', event => mouseOverTrumpHan
 profilePictureContainer.addEventListener('mouseout', window._.throttle(mouseOutTrumpHandler, 5000));
 
 window.addEventListener('scroll', window._.throttle(loadMoreAtTheBottom, 500));
-window.addEventListener('scroll', window._.throttle(attachFixedClassToBody, 500));
+window.addEventListener('scroll', window._.throttle(attachOrRemoveFixedClassToBody, 500));

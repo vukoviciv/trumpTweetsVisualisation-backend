@@ -51,12 +51,11 @@ body {
 
 #app {
   background-color: #ffffff; }
-  #app .main-container {
+  #app .header {
+    position: relative;
     max-width: 64rem;
     width: 100%;
     margin: 0 auto; }
-  #app .header {
-    position: relative; }
     #app .header .header-background img {
       width: 100%;
       border-radius: 0 0 2rem 2rem; }
@@ -68,7 +67,8 @@ body {
       -moz-transition: all .2s ease-out;
       -ms-transition: all .2s ease-out;
       -o-transition: all .2s ease-out;
-      transition: all .2s ease-out; }
+      transition: all .2s ease-out;
+      transform: scale(1); }
       #app .header .header-profile-picture .profile-picture-container {
         position: relative;
         height: 12.5rem;
@@ -132,14 +132,18 @@ body {
       padding: .8rem;
       line-height: 1.5; }
       #app .tweets-container li.tweet:hover {
-        background-color: #f6f6f6;
+        background-color: #f9f9f9;
         -webkit-transition: all .2s ease-out;
         -moz-transition: all .2s ease-out;
         -ms-transition: all .2s ease-out;
         -o-transition: all .2s ease-out;
-        transition: all .2s ease-out;
-        transform: scale(1.2);
-        cursor: pointer; }
+        transition: all .2s ease-out; }
+        @media (min-width: 1200px) {
+          #app .tweets-container li.tweet:hover {
+            transform: scale(1.2);
+            cursor: pointer; } }
+      #app .tweets-container li.tweet .text-wrapper {
+        cursor: text; }
       #app .tweets-container li.tweet .time-count-wrapper {
         display: flex;
         align-items: baseline;

@@ -20,14 +20,11 @@ $light-grey: #657786;
 #app {
   background-color: $background-color;
 
-  .main-container {
+  .header {
+    position: relative;
     max-width: $max-width;
     width: 100%;
     margin: 0 auto;
-  }
-
-  .header {
-    position: relative;
 
     .header-background img {
       width: 100%;
@@ -39,6 +36,7 @@ $light-grey: #657786;
       left: -0.5rem;;
       bottom: -4rem;
       @include transition-ease-out();
+      transform: scale(1);
 
       .profile-picture-container {
         position: relative;
@@ -118,10 +116,16 @@ $light-grey: #657786;
       line-height: 1.5;
 
       &:hover {
-        background-color: #f6f6f6;
+        background-color: #f9f9f9;
         @include transition-ease-out();
-        transform: scale(1.2);
-        cursor: pointer;
+        @include for-desktop-up() {
+          transform: scale(1.2);
+          cursor: pointer;
+        }
+      }
+
+      .text-wrapper {
+        cursor: text;
       }
 
       .time-count-wrapper {
