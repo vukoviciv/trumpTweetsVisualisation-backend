@@ -5,65 +5,45 @@ const userRepository = require('../repositories/userRepository');
 
 const router = express.Router();
 
-const { fetchTweets, updateUserProfile, getLargeProfileImageFromSmall } = require('../lib/helpers');
+const { fetchTweets, updateOrCreateUserProfile, getLargeProfileImageFromSmall } = require('../lib/helpers');
 
 router.get('/', (req, res) => {
-  const limit = 50;
-  let page = 1;
-  let profile;
   userRepository.getProfileAndBackgroundUrl()
-    .then((data) => {
-      profile = {
-        image: getLargeProfileImageFromSmall(data.profile_image_url_https),
-        banner: data.profile_banner_url,
-      };
-    })
-    .then(tweetRepository.fetchPage(page, limit)
-      .then((data) => {
-        page += 1;
-        res.render('tweets', {
-          tweets: data.rows,
-          baseUrl: 'tweets',
-          nextPageUrl: `${page}`,
-          profile,
-        });
-      }))
+    .then(data => ({
+      image: getLargeProfileImageFromSmall(data.profile_image_url_https),
+      banner: data.profile_banner_url,
+    }))
+    .then(profile => res.render('tweets', {
+      baseUrl: 'tweets',
+      profile,
+    }))
     .catch(err => res.render('error', { error: err }));
 });
 
 router.get('/update', (req, res) => {
-  // TODO: clean up this!
   tweetRepository.getNewestTweet()
     .then((lastTweet) => {
       options.queryParams.since_id = lastTweet.id_str;
-
-      updateUserProfile(lastTweet.id_str, options.tweetsUrl);
-
-      fetchTweets(options)
-        .then((data) => {
-          // reverse data so we have newest tweet last wrote in db
-          const reversedData = data.reverse();
-          tweetRepository.saveBulk(reversedData)
-            .then(numberOfSavedTweets => console.log('Number of saved tweets: ', numberOfSavedTweets))
-            .catch(err => res.render('error', { error: err }));
-        })
-        .then(res.render('/'))
-        .catch(err => res.render('error', { error: err }));
+      updateOrCreateUserProfile(lastTweet.id_str, options.tweetsUrl);
     })
-    .catch(err => console.log(err));
+    .then(() => fetchTweets(options))
+    .then(data => tweetRepository.saveBulk(data.reverse()))
+    .then((numberOfSavedTweets) => {
+      console.log('Number of saved tweets: ', numberOfSavedTweets);
+      res.redirect('/tweets');
+    })
+    .catch(err => res.render('error', { error: err }));
 });
 
-router.get('/:page', (req, res) => {
-  let { page } = req.params;
+/* API endpoints */
+
+router.get('/page/:page', (req, res) => {
+  const { page } = req.params;
   const limit = 50;
 
-  tweetRepository.fetchPage(page, limit)
+  tweetRepository.fetchPage(limit, page)
     .then((data) => {
-      page += 1;
-      res.json({
-        tweets: data.rows,
-        nextPageUrl: `${page}`,
-      });
+      res.json({ tweets: data.rows });
     });
 });
 

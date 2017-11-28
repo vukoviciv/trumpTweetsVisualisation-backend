@@ -6,7 +6,7 @@ const createGraph = (nodes = JSON.parse(window.sessionStorage.getItem('graphData
   const windowDimensions = lib.getWindowInnerDimension();
   const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
   const forceY = d3.forceY(windowDimensions.height / 2).strength(0.09);
-  const unitConstant = windowDimensions.width * 0.0005;
+  const unitConstant = windowDimensions.width * 0.0004;
   const color = d3.scaleOrdinal(d3.schemeCategory20);
 
   const d3graphContainer = d3.select('#graph-container');

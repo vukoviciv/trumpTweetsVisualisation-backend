@@ -2,18 +2,17 @@ extends layout
 
 block content
     div#app.content
-        div.main-container
-            div.header
-                div.header-background
-                    img(src=`${profile.banner}`)
-                div.header-profile-picture
-                    div.profile-picture-container
-                        img(src=`${profile.image}`)
-                div.button-container
-                    div.twitter-button
-                        a(href=`/${baseUrl}/update`) Get new tweets
+        div.header
+            div.header-background
+                img(src=`${profile.banner}`)
+            div.header-profile-picture
+                div.profile-picture-container
+                    img(src=`${profile.image}`)
+            div.button-container
+                div.twitter-button
+                    a(href=`/${baseUrl}/update`) Get new tweets
 
-            div.tweets-container
+        div.tweets-container
                 ol#tweet-items-container
 
                 div#load-more LOAD MORE
