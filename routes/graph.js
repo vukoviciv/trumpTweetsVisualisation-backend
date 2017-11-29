@@ -5,22 +5,33 @@ const router = express.Router();
 
 /* TEMP */
 const tweetRepository = require('../repositories/tweetRepository');
-const analyse = require('../lib/analyseData');
 
 const cleanUpTextTweet = (tweetText) => {
   const removedSigns = tweetText.replace(/[^\w\s\'']/g, ' ');
-  return removedSigns.toUpperCase();
+  const upperCased = removedSigns.toUpperCase();
+  const splited = upperCased.split(' ');
+  const removedNonWords = splited.filter((str) => {
+    if (str.length > 1) return str;
+    return (str === 'A' || str === 'I');
+  });
+  return ` ${removedNonWords.join(' ')}`;
 };
 
-const getTweetsContainingTheWord = (word, tweetsArray) =>
-  tweetsArray.filter((tweet) => {
-    const cleanedTweet = cleanUpTextTweet(tweet);
-    if (cleanedTweet.contains(` ${word} `)) {
-      console.log('BInGO');
-      console.log(tweet.full_text);
+const getTweetsContainingTheWord = (word, tweetsObjectsArray) => {
+  const temp = tweetsObjectsArray.map(tweet => Object.assign(tweet, { count: 0 }));
+  const test = temp.map((tweet) => {
+    const cleanedTweet = cleanUpTextTweet(tweet.full_text);
+
+    if (cleanedTweet.includes(` ${word} `)) {
+      console.log('BINGO', tweet.count);
+
+      return Object.assign(tweet, { count: tweet.count + 1 });
     }
-    return cleanedTweet.contains(` ${word} `);
+    return tweet;
   });
+
+  return test;
+};
 
 /* end  TEMP */
 
@@ -29,11 +40,9 @@ router.get('/fetch_graph', graphController.analyseWordsInTweets);
 router.get('/test', (req, res) => {
   tweetRepository.getTweetsOrderByFavoriteCount()
     .then((tweets) => {
-      let aa = getTweetsContainingTheWord('GREAT', tweets);
-      let test = JSON.stringify(tweets);
+      const test = getTweetsContainingTheWord('GREAT', tweets);
       res.render('test', {
-        tweets: test,
-        t: 12,
+        tweets: JSON.stringify(test),
       });
     })
     .catch(err => err);

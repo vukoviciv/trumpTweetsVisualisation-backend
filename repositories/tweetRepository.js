@@ -53,6 +53,7 @@ const getNewestTweet = () =>
 const getTweetsOrderByFavoriteCount = () =>
   Tweet.findAll({
     attributes: ['id', 'full_text', 'favorite_count'],
+    raw: true,
     order: [['favorite_count', 'DESC']],
   }).then(tweets => tweets);
 
