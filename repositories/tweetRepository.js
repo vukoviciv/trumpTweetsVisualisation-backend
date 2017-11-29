@@ -49,10 +49,18 @@ const getNewestTweet = () =>
     order: [['id_str', 'DESC']],
   }).then(one => one);
 
+  /* TEMP */
+const getTweetsOrderByFavoriteCount = () =>
+  Tweet.findAll({
+    attributes: ['id', 'full_text', 'favorite_count'],
+    order: [['favorite_count', 'DESC']],
+  }).then(tweets => tweets);
+
 module.exports = {
   saveOne,
   saveBulk,
   fetchAll,
   fetchPage,
   getNewestTweet,
+  getTweetsOrderByFavoriteCount,
 };

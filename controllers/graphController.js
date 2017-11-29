@@ -4,9 +4,10 @@ const { defaultWords } = require('../lib/options');
 
 const analyseWordsInTweets = (req, res) => {
   const words = req.query.words ? req.query.words.split(',') : defaultWords;
+  const uniqueWords = Array.from(new Set(words));
   tweetRepository.fetchAll()
     .then(data => dataAnalyser.extractTextProperties(data))
-    .then(textArray => dataAnalyser.analyseText(textArray, words))
+    .then(textArray => dataAnalyser.analyseText(textArray, uniqueWords))
     .then(analysedText => res.send(analysedText))
     .catch(err => res.render('error', { error: err }));
 };
