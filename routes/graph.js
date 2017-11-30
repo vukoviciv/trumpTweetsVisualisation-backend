@@ -38,7 +38,7 @@ router.get('/fetch_graph', graphController.analyseWordsInTweets);
 router.get('/test', (req, res) => {
   tweetRepository.getTweetsOrderByFavoriteCount()
     .then((tweets) => {
-      const test = getTweetsContainingTheWord(['PRESIDENT'], tweets);
+      const test = getTweetsContainingTheWord('PRESIDENT', tweets);
       res.render('test', {
         tweets: JSON.stringify(test),
       });

@@ -2020,7 +2020,7 @@ body.fixed-picture #app .button-container {
 .xAxis path, .yAxis path {
   fill: none;
   stroke: white;
-  stroke-width: 2px; }
+  stroke-width: 1px; }
 
 .modal-card {
   height: 650px;
