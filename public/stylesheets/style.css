@@ -2014,6 +2014,14 @@ body.fixed-picture #app .button-container {
   .control.is-loading.is-large:after {
     font-size: 1.5rem; }
 
+.xAxis text, .yAxis text {
+  fill: white; }
+
+.xAxis path, .yAxis path {
+  fill: none;
+  stroke: white;
+  stroke-width: 2px; }
+
 .modal-card {
   height: 650px;
   color: white; }

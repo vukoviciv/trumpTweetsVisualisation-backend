@@ -23,9 +23,7 @@ const getTweetsContainingTheWord = (word, tweetsObjectsArray) => {
     const cleanedTweet = cleanUpTextTweet(tweet.full_text);
 
     if (cleanedTweet.includes(` ${word} `)) {
-      console.log('BINGO', tweet.count);
-
-      return Object.assign(tweet, { count: tweet.count + 1 });
+      return Object.assign(tweet, { count: tweet.count + 1, words: { word } });
     }
     return tweet;
   });
@@ -40,7 +38,7 @@ router.get('/fetch_graph', graphController.analyseWordsInTweets);
 router.get('/test', (req, res) => {
   tweetRepository.getTweetsOrderByFavoriteCount()
     .then((tweets) => {
-      const test = getTweetsContainingTheWord('GREAT', tweets);
+      const test = getTweetsContainingTheWord(['PRESIDENT'], tweets);
       res.render('test', {
         tweets: JSON.stringify(test),
       });
