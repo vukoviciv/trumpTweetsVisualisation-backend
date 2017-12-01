@@ -11,18 +11,8 @@ const createGraph = (tweets) => {
     top: 20,
     right: 20,
     bottom: 50,
-    left: 70,
+    left: 200,
   };
-
-  const filteredTweets = tweets.filter(tweet => tweet.count > 0);
-
-  const data = filteredTweets.map(tweet => ({
-    favorite_count: tweet.favorite_count,
-    word_count: tweet.count,
-    words: tweet.words,
-  }));
-
-  console.log(data);
 
   const transformX = `translate(${margin.left / 2}px, ${windowDimensions.height - margin.bottom}px)`;
   const transformY = `translate(${margin.left / 2}px, ${margin.top + (windowDimensions.height / 2)}px)`;
@@ -38,29 +28,35 @@ const createGraph = (tweets) => {
 
   const xAxisScale = d3.scaleLinear()
     .range([0, windowDimensions.width - (margin.right + margin.left)])
-    .domain(d3.extent(data, d => d.favorite_count));
+    .domain(d3.extent(tweets, d => d.favorite_count));
 
   const xAxis = d3.axisBottom()
     .scale(xAxisScale);
 
     /* Y */
 
-  const yAxisScale = d3.scaleLinear()
-    .range([(windowDimensions.height / 2) - (margin.top + margin.bottom), 0])
-    .domain([0, d3.max(data, d => d.word_count)]);
+  const colorScale = words.map((word, i) => ({ color: d3.schemeCategory10[i], word }));
+
+  const yAxisScale = d3.scalePoint()
+    .domain(words)
+    .range([(windowDimensions.height / 2) - (margin.top + margin.bottom), 0]);
 
   const yAxis = d3.axisLeft()
-    .scale(yAxisScale)
-    .ticks(1);
+    .scale(yAxisScale);
+
 
   d3graphContainer.selectAll('dot')
-    .data(data)
+    .data(tweets)
     .enter().append('circle')
-    .attr('r', d => d.word_count)
+    .attr('r', 1)
     .attr('cx', d => xAxisScale(d.favorite_count))
-    .attr('cy', d => yAxisScale(d.word_count))
+    .attr('cy', d => yAxisScale(d.words.word))
     .style('transform', transformY)
-    .style('fill', 'yellow');
+    .style('fill', (d) => {
+      const colorObj = colorScale.find(elem => elem.word === d.words.word);
+      return colorObj.color;
+    });
+
 
   const yAxisGroup = d3graphContainer.append('g')
     .call(yAxis)

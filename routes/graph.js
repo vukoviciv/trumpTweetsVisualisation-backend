@@ -17,18 +17,20 @@ const cleanUpTextTweet = (tweetText) => {
   return ` ${removedNonWords.join(' ')}`;
 };
 
-const getTweetsContainingTheWord = (word, tweetsObjectsArray) => {
-  const temp = tweetsObjectsArray.map(tweet => Object.assign(tweet, { count: 0 }));
-  const test = temp.map((tweet) => {
-    const cleanedTweet = cleanUpTextTweet(tweet.full_text);
+const getTweetsContainingTheWord = (words, tweetsObjectsArray) => {
+  const temp = tweetsObjectsArray.map((tweet) => {
+    const tweetClone = Object.assign(tweet, { words: {} });
+    const cleanedTweetText = cleanUpTextTweet(tweet.full_text);
 
-    if (cleanedTweet.includes(` ${word} `)) {
-      return Object.assign(tweet, { count: tweet.count + 1, words: { word } });
+    for (let i = 0; i < words.length; i += 1) {
+      if (cleanedTweetText.includes(` ${words[i]} `)) tweetClone.words.word = words[i];
     }
-    return tweet;
+
+    return tweetClone;
   });
 
-  return test;
+  const filtered = temp.filter(tweet => Object.prototype.hasOwnProperty.call(tweet.words, 'word'));
+  return filtered;
 };
 
 /* end  TEMP */
@@ -38,9 +40,11 @@ router.get('/fetch_graph', graphController.analyseWordsInTweets);
 router.get('/test', (req, res) => {
   tweetRepository.getTweetsOrderByFavoriteCount()
     .then((tweets) => {
-      const test = getTweetsContainingTheWord('PRESIDENT', tweets);
+      const temp = [undefined, 'BAD', 'SAD', 'PRESIDENT', 'GREAT'];
+      const test = getTweetsContainingTheWord(temp, tweets);
       res.render('test', {
         tweets: JSON.stringify(test),
+        words: JSON.stringify(temp),
       });
     })
     .catch(err => err);
