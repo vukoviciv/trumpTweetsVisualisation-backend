@@ -12,11 +12,30 @@ const analyseWordsInTweets = (req, res) => {
     .catch(err => res.render('error', { error: err }));
 };
 
+const correlationGraph = (req, res) => {
+  tweetRepository.getTweetsOrderByFavoriteCount()
+    .then((tweets) => {
+      const temp = [undefined, 'BAD', 'SAD', 'PRESIDENT', 'GREAT'];
+      const test = dataAnalyser.getTweetsContainingTheWord(temp, tweets);
+      res.send({
+        tweets: test,
+        words: temp,
+      });
+    })
+    .catch(err => err);
+};
+
 const indexPage = (req, res) => {
-  res.render('graph');
+  res.render('graphs/graph');
+};
+
+const correlationGraphPage = (req, res) => {
+  res.render('graphs/correlationGraph');
 };
 
 module.exports = {
   analyseWordsInTweets,
+  correlationGraph,
+  correlationGraphPage,
   indexPage,
 };
