@@ -1,21 +1,17 @@
 const getWindowInnerDimension = margin => ({
-  width: 960 - margin.left - margin.right,
-  height: 500 - margin.top - margin.bottom,
+  width: window.innerWidth - margin.left - margin.right,
+  height: window.innerHeight - margin.top - margin.bottom,
 });
 
 const createGraph = (data) => {
   const { d3 } = window;
   const margin = {
-    top: 20,
+    top: 40,
     right: 10,
-    bottom: 20,
+    bottom: 40,
     left: 100,
   };
   const windowDimensions = getWindowInnerDimension(margin);
-
-
-  const transformX = `translate(${margin.left / 2}px, ${windowDimensions.height / 3}px)`;
-  const transformY = `translate(${margin.left / 2}px, ${windowDimensions.height / 3}px)`;
 
   const d3graphContainer = d3.select('.correlation-graph-container')
     .append('svg')
@@ -26,8 +22,15 @@ const createGraph = (data) => {
     .style('background-color', 'black')
     .style('color', 'white');
 
-  /* X */
 
+  const colorScale = data.words.map(word =>
+    ({ color: d3.schemeCategory20[Math.floor(Math.random() * 20)], word }));
+
+  const tooltip = d3.select('.correlation-graph-container')
+    .append('div')
+    .attr('class', 'tooltip hidden');
+
+  /* X */
   const xAxisScale = d3.scaleLinear()
     .domain(d3.extent(data.tweets, d => d.favorite_count))
     .range([0, windowDimensions.width]);
@@ -35,9 +38,7 @@ const createGraph = (data) => {
   const xAxis = d3.axisBottom()
     .scale(xAxisScale);
 
-    /* Y */
-  const colorScale = data.words.map((word, i) => ({ color: d3.schemeCategory20[i], word }));
-
+  /* Y */
   const yAxisScale = d3.scalePoint()
     .range([windowDimensions.height, 0])
     .domain(data.words);
@@ -51,14 +52,13 @@ const createGraph = (data) => {
     .data(data.tweets)
     .enter()
     .append('circle')
-    .attr('r', 2)
+    .attr('r', 5)
     .attr('cx', d => xAxisScale(d.favorite_count))
     .attr('cy', d => yAxisScale(d.words.word))
     .style('fill', (d) => {
       const colorObj = colorScale.find(elem => elem.word === d.words.word);
       return colorObj.color;
     });
-
 
   const yAxisGroup = d3graphContainer.append('g')
     .call(yAxis)
@@ -77,10 +77,19 @@ const createGraph = (data) => {
   };
 
   d3.select('svg').call(d3.zoom()
-    .scaleExtent([1, 1000])
+    .scaleExtent([1, Infinity])
     .translateExtent([[0, 0], [windowDimensions.width, windowDimensions.height]])
     .extent([[0, 0], [windowDimensions.width, windowDimensions.height]])
     .on('zoom', () => zoomed()));
+
+  circles
+    .on('mouseover', (d) => {
+      tooltip.html(`${d.full_text} <br /> ${d.favorite_count}`)
+        .style('left', `${d3.event.pageX - 50}px`)
+        .style('top', `${d3.event.pageY - 60}px`)
+        .classed('hidden', false);
+    })
+    .on('mouseout', () => tooltip.classed('hidden', true));
 };
 
 fetch('/graph/correlation/fetch_graph')
