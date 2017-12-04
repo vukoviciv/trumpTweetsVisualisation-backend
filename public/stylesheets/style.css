@@ -2014,13 +2014,19 @@ body.fixed-picture #app .button-container {
   .control.is-loading.is-large:after {
     font-size: 1.5rem; }
 
+.correlation-graph-container svg {
+  background-color: black; }
+
 .xAxis text, .yAxis text {
   fill: white; }
 
 .xAxis path, .yAxis path {
   fill: none;
-  stroke: white;
+  stroke: rgba(255, 255, 255, 0.438);
   stroke-width: 1px; }
+
+.xAxis line, .yAxis line {
+  stroke: white; }
 
 .modal-card {
   height: 650px;

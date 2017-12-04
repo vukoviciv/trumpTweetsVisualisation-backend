@@ -1,56 +1,59 @@
-const getWindowInnerDimension = () => ({
-  width: window.innerWidth,
-  height: window.innerHeight,
+const getWindowInnerDimension = margin => ({
+  width: 960 - margin.left - margin.right,
+  height: 500 - margin.top - margin.bottom,
 });
 
-
 const createGraph = (data) => {
-  debugger;
   const { d3 } = window;
-  const windowDimensions = getWindowInnerDimension();
   const margin = {
     top: 20,
-    right: 20,
-    bottom: 50,
-    left: 200,
+    right: 10,
+    bottom: 20,
+    left: 100,
   };
+  const windowDimensions = getWindowInnerDimension(margin);
 
-  const transformX = `translate(${margin.left / 2}px, ${windowDimensions.height - margin.bottom}px)`;
-  const transformY = `translate(${margin.left / 2}px, ${margin.top + (windowDimensions.height / 2)}px)`;
+
+  const transformX = `translate(${margin.left / 2}px, ${windowDimensions.height / 3}px)`;
+  const transformY = `translate(${margin.left / 2}px, ${windowDimensions.height / 3}px)`;
 
   const d3graphContainer = d3.select('.correlation-graph-container')
     .append('svg')
-    .attr('width', windowDimensions.width)
-    .attr('height', windowDimensions.height)
+    .attr('width', windowDimensions.width + margin.left + margin.right)
+    .attr('height', windowDimensions.height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
     .style('background-color', 'black')
     .style('color', 'white');
 
   /* X */
 
   const xAxisScale = d3.scaleLinear()
-    .range([0, windowDimensions.width - (margin.right + margin.left)])
-    .domain(d3.extent(data.tweets, d => d.favorite_count));
+    .domain(d3.extent(data.tweets, d => d.favorite_count))
+    .range([0, windowDimensions.width]);
 
   const xAxis = d3.axisBottom()
     .scale(xAxisScale);
 
     /* Y */
-  const colorScale = data.words.map((word, i) => ({ color: d3.schemeCategory10[i], word }));
+  const colorScale = data.words.map((word, i) => ({ color: d3.schemeCategory20[i], word }));
 
   const yAxisScale = d3.scalePoint()
-    .domain(data.words)
-    .range([(windowDimensions.height / 2) - (margin.top + margin.bottom), 0]);
+    .range([windowDimensions.height, 0])
+    .domain(data.words);
 
   const yAxis = d3.axisLeft()
     .scale(yAxisScale);
 
-  d3graphContainer.selectAll('dot')
+  const circles = d3graphContainer.append('g')
+    .attr('class', 'circles')
+    .selectAll('dot')
     .data(data.tweets)
-    .enter().append('circle')
-    .attr('r', 1)
+    .enter()
+    .append('circle')
+    .attr('r', 2)
     .attr('cx', d => xAxisScale(d.favorite_count))
     .attr('cy', d => yAxisScale(d.words.word))
-    .style('transform', transformY)
     .style('fill', (d) => {
       const colorObj = colorScale.find(elem => elem.word === d.words.word);
       return colorObj.color;
@@ -63,10 +66,21 @@ const createGraph = (data) => {
 
   const xAxisGroup = d3graphContainer.append('g')
     .call(xAxis)
-    .attr('class', 'xAxis');
+    .attr('class', 'xAxis')
+    .attr('transform', `translate(${0}, ${windowDimensions.height})`);
 
-  xAxisGroup.style('transform', transformX);
-  yAxisGroup.style('transform', transformY);
+  const zoomed = () => {
+    const newXScale = d3.event.transform.rescaleX(xAxisScale);
+    xAxisGroup.call(xAxis.scale(newXScale));
+
+    circles.attr('cx', d => newXScale(d.favorite_count));
+  };
+
+  d3.select('svg').call(d3.zoom()
+    .scaleExtent([1, 1000])
+    .translateExtent([[0, 0], [windowDimensions.width, windowDimensions.height]])
+    .extent([[0, 0], [windowDimensions.width, windowDimensions.height]])
+    .on('zoom', () => zoomed()));
 };
 
 fetch('/graph/correlation/fetch_graph')

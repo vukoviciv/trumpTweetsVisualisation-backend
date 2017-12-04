@@ -13,13 +13,16 @@ const analyseWordsInTweets = (req, res) => {
 };
 
 const correlationGraph = (req, res) => {
+  const fetchedWords = req.query.words ? req.query.words.split(',') : defaultWords;
+  const uniqueWords = Array.from(new Set(fetchedWords));
   tweetRepository.getTweetsOrderByFavoriteCount()
     .then((tweets) => {
-      const temp = [undefined, 'BAD', 'SAD', 'PRESIDENT', 'GREAT'];
-      const test = dataAnalyser.getTweetsContainingTheWord(temp, tweets);
+      // we need first one empty to avoid overlaping with x axis
+      const words = [undefined].concat(uniqueWords);
+      const tweetsContainingWords = dataAnalyser.getTweetsContainingTheWord(words, tweets);
       res.send({
-        tweets: test,
-        words: temp,
+        tweets: tweetsContainingWords,
+        words,
       });
     })
     .catch(err => err);

@@ -1,3 +1,7 @@
+.correlation-graph-container svg {
+  background-color: black;
+}
+
 .xAxis, .yAxis {
   text {
     fill: white
@@ -5,7 +9,11 @@
 
   path {
     fill: none;
-    stroke: white;
+    stroke: rgba(255, 255, 255, 0.438);
     stroke-width: 1px;
+  }
+
+  line {
+    stroke: white;
   }
 }
