@@ -8,7 +8,7 @@
     "compile-tweets-page": "browserify public/js/tweets/main.js -o public/dist/tweetsBundle.js -t [ babelify --presets [ env ] ]",
     "compile": "npm run compile-graph-page && npm run compile-tweets-page",
     "devstart": "npm run compile && nodemon ./bin/www",
-    "initialize-db": "nodemon ./bin/initialize-database"
+    "initialize-db": "node ./bin/initialize-database"
   },
   "dependencies": {
     "body-parser": "~1.17.1",

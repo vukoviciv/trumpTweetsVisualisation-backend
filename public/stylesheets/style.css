@@ -196,7 +196,7 @@ body.fixed-picture #app .button-container {
   justify-content: center;
   overflow: hidden;
   position: fixed;
-  z-index: 20; }
+  z-index: 40; }
   .modal.is-active {
     display: flex; }
 
@@ -237,7 +237,7 @@ body.fixed-picture #app .button-container {
   display: inline-block;
   flex-grow: 0;
   flex-shrink: 0;
-  font-size: 1rem;
+  font-size: 0;
   height: 20px;
   max-height: 20px;
   max-width: 20px;
@@ -1052,6 +1052,43 @@ body.fixed-picture #app .button-container {
     color: #7a7a7a;
     box-shadow: none;
     pointer-events: none; }
+  .button.is-rounded {
+    border-radius: 290486px;
+    padding-left: 1em;
+    padding-right: 1em; }
+
+.buttons {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; }
+  .buttons .button {
+    margin-bottom: 0.5rem; }
+    .buttons .button:not(:last-child) {
+      margin-right: 0.5rem; }
+  .buttons:last-child {
+    margin-bottom: -0.5rem; }
+  .buttons:not(:last-child) {
+    margin-bottom: 1rem; }
+  .buttons.has-addons .button:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0; }
+  .buttons.has-addons .button:not(:last-child) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    margin-right: -1px; }
+  .buttons.has-addons .button:last-child {
+    margin-right: 0; }
+  .buttons.has-addons .button:hover, .buttons.has-addons .button.is-hovered {
+    z-index: 2; }
+  .buttons.has-addons .button:focus, .buttons.has-addons .button.is-focused, .buttons.has-addons .button:active, .buttons.has-addons .button.is-active, .buttons.has-addons .button.is-selected {
+    z-index: 3; }
+    .buttons.has-addons .button:focus:hover, .buttons.has-addons .button.is-focused:hover, .buttons.has-addons .button:active:hover, .buttons.has-addons .button.is-active:hover, .buttons.has-addons .button.is-selected:hover {
+      z-index: 4; }
+  .buttons.is-centered {
+    justify-content: center; }
+  .buttons.is-right {
+    justify-content: flex-end; }
 
 .input,
 .textarea {
@@ -1128,9 +1165,6 @@ body.fixed-picture #app .button-container {
     .input[disabled]:-ms-input-placeholder,
     .textarea[disabled]:-ms-input-placeholder {
       color: rgba(122, 122, 122, 0.3); }
-  .input[type="search"],
-  .textarea[type="search"] {
-    border-radius: 290486px; }
   .input[readonly],
   .textarea[readonly] {
     box-shadow: none; }
@@ -1243,6 +1277,11 @@ body.fixed-picture #app .button-container {
     display: inline;
     width: auto; }
 
+.input.is-rounded {
+  border-radius: 290486px;
+  padding-left: 1em;
+  padding-right: 1em; }
+
 .input.is-static {
   background-color: transparent;
   border-color: transparent;
@@ -1301,11 +1340,15 @@ body.fixed-picture #app .button-container {
       pointer-events: none;
       position: absolute;
       transform: rotate(-45deg);
+      transform-origin: center;
       width: 0.5em;
       margin-top: -0.375em;
       right: 1.125em;
       top: 50%;
       z-index: 4; }
+  .select.is-rounded select {
+    border-radius: 290486px;
+    padding-left: 1em; }
   .select select {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -1637,10 +1680,10 @@ body.fixed-picture #app .button-container {
   .file.has-name .file-name {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0; }
-  .file.is-centered {
-    justify-content: center; }
-  .file.is-right {
-    justify-content: flex-end; }
+  .file.has-name.is-empty .file-cta {
+    border-radius: 3px; }
+  .file.has-name.is-empty .file-name {
+    display: none; }
   .file.is-boxed .file-label {
     flex-direction: column; }
   .file.is-boxed .file-cta {
@@ -1665,17 +1708,21 @@ body.fixed-picture #app .button-container {
   .file.is-boxed.has-name .file-name {
     border-radius: 0 0 3px 3px;
     border-width: 0 1px 1px; }
-  .file.is-right .file-cta {
-    border-radius: 0 3px 3px 0; }
-  .file.is-right .file-name {
-    border-radius: 3px 0 0 3px;
-    border-width: 1px 0 1px 1px;
-    order: -1; }
+  .file.is-centered {
+    justify-content: center; }
   .file.is-fullwidth .file-label {
     width: 100%; }
   .file.is-fullwidth .file-name {
     flex-grow: 1;
     max-width: none; }
+  .file.is-right {
+    justify-content: flex-end; }
+    .file.is-right .file-cta {
+      border-radius: 0 3px 3px 0; }
+    .file.is-right .file-name {
+      border-radius: 3px 0 0 3px;
+      border-width: 1px 0 1px 1px;
+      order: -1; }
 
 .file-label {
   align-items: stretch;
@@ -1809,46 +1856,46 @@ body.fixed-picture #app .button-container {
   justify-content: flex-start; }
   .field.has-addons .control:not(:last-child) {
     margin-right: -1px; }
+  .field.has-addons .control:not(:first-child):not(:last-child) .button,
+  .field.has-addons .control:not(:first-child):not(:last-child) .input,
+  .field.has-addons .control:not(:first-child):not(:last-child) .select select {
+    border-radius: 0; }
   .field.has-addons .control:first-child .button,
   .field.has-addons .control:first-child .input,
   .field.has-addons .control:first-child .select select {
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px; }
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0; }
   .field.has-addons .control:last-child .button,
   .field.has-addons .control:last-child .input,
   .field.has-addons .control:last-child .select select {
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px; }
-  .field.has-addons .control .button,
-  .field.has-addons .control .input,
-  .field.has-addons .control .select select {
-    border-radius: 0; }
-    .field.has-addons .control .button:hover, .field.has-addons .control .button.is-hovered,
-    .field.has-addons .control .input:hover,
-    .field.has-addons .control .input.is-hovered,
-    .field.has-addons .control .select select:hover,
-    .field.has-addons .control .select select.is-hovered {
-      z-index: 2; }
-    .field.has-addons .control .button:focus, .field.has-addons .control .button.is-focused, .field.has-addons .control .button:active, .field.has-addons .control .button.is-active,
-    .field.has-addons .control .input:focus,
-    .field.has-addons .control .input.is-focused,
-    .field.has-addons .control .input:active,
-    .field.has-addons .control .input.is-active,
-    .field.has-addons .control .select select:focus,
-    .field.has-addons .control .select select.is-focused,
-    .field.has-addons .control .select select:active,
-    .field.has-addons .control .select select.is-active {
-      z-index: 3; }
-      .field.has-addons .control .button:focus:hover, .field.has-addons .control .button.is-focused:hover, .field.has-addons .control .button:active:hover, .field.has-addons .control .button.is-active:hover,
-      .field.has-addons .control .input:focus:hover,
-      .field.has-addons .control .input.is-focused:hover,
-      .field.has-addons .control .input:active:hover,
-      .field.has-addons .control .input.is-active:hover,
-      .field.has-addons .control .select select:focus:hover,
-      .field.has-addons .control .select select.is-focused:hover,
-      .field.has-addons .control .select select:active:hover,
-      .field.has-addons .control .select select.is-active:hover {
-        z-index: 4; }
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0; }
+  .field.has-addons .control .button:hover, .field.has-addons .control .button.is-hovered,
+  .field.has-addons .control .input:hover,
+  .field.has-addons .control .input.is-hovered,
+  .field.has-addons .control .select select:hover,
+  .field.has-addons .control .select select.is-hovered {
+    z-index: 2; }
+  .field.has-addons .control .button:focus, .field.has-addons .control .button.is-focused, .field.has-addons .control .button:active, .field.has-addons .control .button.is-active,
+  .field.has-addons .control .input:focus,
+  .field.has-addons .control .input.is-focused,
+  .field.has-addons .control .input:active,
+  .field.has-addons .control .input.is-active,
+  .field.has-addons .control .select select:focus,
+  .field.has-addons .control .select select.is-focused,
+  .field.has-addons .control .select select:active,
+  .field.has-addons .control .select select.is-active {
+    z-index: 3; }
+    .field.has-addons .control .button:focus:hover, .field.has-addons .control .button.is-focused:hover, .field.has-addons .control .button:active:hover, .field.has-addons .control .button.is-active:hover,
+    .field.has-addons .control .input:focus:hover,
+    .field.has-addons .control .input.is-focused:hover,
+    .field.has-addons .control .input:active:hover,
+    .field.has-addons .control .input.is-active:hover,
+    .field.has-addons .control .select select:focus:hover,
+    .field.has-addons .control .select select.is-focused:hover,
+    .field.has-addons .control .select select:active:hover,
+    .field.has-addons .control .select select.is-active:hover {
+      z-index: 4; }
   .field.has-addons .control.is-expanded {
     flex-grow: 1; }
   .field.has-addons.has-addons-centered {
@@ -2006,7 +2053,8 @@ body.fixed-picture #app .button-container {
     width: 1em;
     position: absolute !important;
     right: 0.625em;
-    top: 0.625em; }
+    top: 0.625em;
+    z-index: 4; }
   .control.is-loading.is-small:after {
     font-size: 0.75rem; }
   .control.is-loading.is-medium:after {
