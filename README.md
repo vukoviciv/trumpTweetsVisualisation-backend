@@ -36,7 +36,7 @@ potentially weird characters (ex. emoji). After you have created your database, 
 Currently, max number of fetched tweets is 10 000. You can change it in [options](https://github.com/vukoviciv/trumpTweetsVisualisation/blob/master/lib/options.js#L2 "maxNumberOfTweets").
 This is tested for the amount of ~3000 tweets.
 
-After this, run `npm start` and start playing with the app.
+After this, run `npm devstart` and start playing with the app. Bundle files will not be buit if `dist` folder doesn't exist in `public` folder.
 
  **Nota bene:** From this point, you are entering in :construction: work in progress :construction: area.
 
