@@ -2062,6 +2062,34 @@ body.fixed-picture #app .button-container {
   .control.is-loading.is-large:after {
     font-size: 1.5rem; }
 
+.correlation-graph-container {
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden; }
+
+.xAxis text, .yAxis text {
+  fill: white; }
+
+.xAxis path, .yAxis path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.438);
+  stroke-width: 1px; }
+
+.xAxis line, .yAxis line {
+  stroke: white; }
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 5px;
+  font-size: 14px;
+  background-color: #48AAE6;
+  border: 1px solid #1da1f2;
+  color: #f6f6f6;
+  border-radius: 2px;
+  pointer-events: none; }
+
 .modal-card {
   height: 650px;
   color: white; }
